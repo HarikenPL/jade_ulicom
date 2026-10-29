@@ -1,0 +1,27 @@
+{
+  "id": "./",
+  "name": "Rover — sterowanie autkiem",
+  "short_name": "Rover",
+  "description": "Sterowanie autkiem przez Bluetooth. Jazda i test czterech silników.",
+  "lang": "pl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#101619",
+  "theme_color": "#101619",
+  "icons": [
+    {
+      "src": "./icons/rover-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/rover-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
