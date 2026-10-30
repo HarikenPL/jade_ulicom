@@ -2,9 +2,9 @@
 // Przechowuje wyłącznie pliki panelu; nie obsługuje komend autka.
 const BASE = new URL('./', self.location.href);
 const PREFIX = 'rover-panel:' + BASE.href + ':';
-const CACHE = PREFIX + '0.5.0';
+const CACHE = PREFIX + '0.7.0';
 const INDEX = new URL('index.html', BASE).href;
-const FILES = ['index.html', 'manifest.webmanifest', 'icons/rover-192.png', 'icons/rover-512.png']
+const FILES = ['index.html', 'manifest.webmanifest', 'icons/rover-192.png', 'icons/rover-512.png', 'assets/rover-mark.webp']
   .map(path => new URL(path, BASE).href);
 
 self.addEventListener('install', event => {

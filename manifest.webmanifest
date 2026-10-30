@@ -8,20 +8,20 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#101619",
-  "theme_color": "#101619",
+  "background_color": "#0c1214",
+  "theme_color": "#0c1214",
   "icons": [
     {
       "src": "./icons/rover-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "./icons/rover-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
