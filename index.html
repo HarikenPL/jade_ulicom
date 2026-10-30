@@ -38,6 +38,96 @@ dialog{color:var(--text);background:#14211d;border:1px solid #4a6050;border-radi
 }
 @media(orientation:landscape) and (max-width:700px) and (max-height:600px){.car-controls{gap:18px}.wheel{max-width:220px}.mode-readout{font-size:7px}.control-card{padding:8px 10px}body[data-radar="true"][data-method="wheel"] .drive-stage{grid-template-columns:minmax(0,1fr) minmax(125px,1fr) minmax(86px,.68fr);gap:8px}body[data-radar="true"] .radar-title{font-size:6px}body[data-radar="true"] #radar-note{font-size:6px}body[data-radar="true"] .radar-bottom{font-size:6px}body[data-radar="true"] .radar-bottom strong{font-size:10px}body[data-radar="true"] .pedal svg{width:25px;height:42px}body[data-radar="true"] .gear-readout span:first-child{display:none}body[data-radar="true"] .spin-controls .hold-button{flex-direction:column;min-height:42px;font-size:7px}body[data-radar="true"] .radar-empty{padding:8px}body[data-radar="true"] .radar-empty strong{font-size:7px}body[data-radar="true"] .radar-empty span{font-size:6px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Wybór biegu w miejscu dotychczasowego wskaźnika. */
+.gear-control{position:relative;display:flex;align-items:center;isolation:isolate;z-index:3}
+.gear-toggle{display:flex;align-items:center;gap:4px;border:0;padding:0;background:transparent;min-height:40px;border-radius:9px;touch-action:manipulation}
+.gear-toggle strong{display:block}.gear-toggle:hover strong,.gear-toggle[aria-expanded="true"] strong{background:#35573b;border-color:#a2dfae}
+.gear-toggle svg{width:11px;height:11px;color:var(--accent);flex:none}
+.gear-popover{position:absolute;top:calc(100% + 7px);left:50%;transform:translateX(-50%);padding:6px;min-width:168px;border:1px solid #699576;border-radius:12px;background:#172b20;box-shadow:0 10px 30px #0009;z-index:12;display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.gear-popover button{display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid transparent;border-radius:7px;background:#203b29;color:var(--text);padding:10px 8px;min-height:44px;font-size:12px}
+.gear-popover button[aria-pressed="true"]{background:#8edfaa;color:#142b1b}.gear-popover b{font-size:17px}
+.connection-guide{margin-top:14px;font-size:12px;line-height:1.65}.connection-guide summary{cursor:pointer;min-height:42px;display:list-item;padding:9px 0;font-weight:650;color:#c5e5cb}.connection-guide>summary{border:1px solid #385a40;border-radius:10px;padding:10px 12px;background:#172c1e}
+.connection-guide details{border-top:1px solid #2d4434;margin-top:10px}.connection-guide p{margin:10px 0;color:#afc4b4}.connection-guide ol{padding-left:21px;margin:8px 0 14px}.connection-guide li{margin:8px 0;color:#afc4b4}.connection-guide strong{color:#ddecdf}.connection-guide a{color:var(--accent)}
+.compat-table{overflow-x:auto}.compat-table table{border-collapse:collapse;width:100%;font-size:11px}.compat-table th,.compat-table td{border-bottom:1px solid #304b37;text-align:left;padding:9px 6px;vertical-align:top}.compat-table th{color:#dce9df}.help-sources{font-size:10px}
+.future-badge{color:#9baa92;font-size:9px;font-weight:400;letter-spacing:.5px;margin-left:8px}.app-version{font:12px ui-monospace,monospace;color:var(--muted);margin-bottom:12px}.app-tools{display:flex;gap:8px;flex-wrap:wrap}.app-tools button{font-size:12px;padding:9px 12px}.update-status{font-size:11px;line-height:1.6;color:#b8d5b9;margin-top:10px;min-height:0}.update-status:empty{display:none}
+@media(orientation:landscape) and (max-height:600px){.gear-toggle{min-height:36px}.gear-popover{top:calc(100% + 3px);min-width:150px}.gear-popover button{min-height:40px;padding:8px 6px}.gear-toggle svg{width:9px;height:9px}}
+@media(orientation:landscape) and (max-width:700px) and (max-height:600px){body[data-radar="true"] .gear-readout{gap:3px}body[data-radar="true"] .gear-toggle strong{padding-left:9px;padding-right:9px}}
+
+/* Dopasowuje kokpit do dostępnego ekranu i profilu użytkownika. */
+html,body{height:100%;overflow:hidden}
+body{--deck-gap:6px;--control-scale:1;--tap:clamp(40px,9dvh,48px)}
+.shell{width:100%;max-width:none;height:100dvh;min-height:0;max-height:none;margin:0;padding:max(7px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(7px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));gap:7px;overflow:hidden}
+.topbar{flex:none;min-height:38px;gap:8px}.brand{gap:8px}.brand-icon{width:38px;height:38px;border-radius:10px}.brand h1{font-size:20px}.brand p{font-size:10px;margin-top:1px}.top-actions{gap:6px}.top-actions button{min-height:38px;padding:6px 12px}.top-actions .icon-button{width:40px;padding:7px}.top-actions #connect-toggle{min-width:80px;font-size:12px}
+#workdeck{flex:1;min-height:0;width:100%;height:auto;gap:var(--deck-gap)}
+#drive-panel,#test-panel{grid-area:main;min-height:0;min-width:0;padding:9px;border-radius:14px;overflow:hidden}
+.card-head,#test-panel .card-head{flex:none;margin:0 0 7px;gap:7px;min-height:22px}.section-title{font-size:13px}.mode-readout{font-size:8px;letter-spacing:.4px}.motion{font-size:9px;padding:3px 6px}
+#drive-stage{flex:1;min-height:0;min-width:0;gap:var(--deck-gap);align-items:stretch;justify-items:stretch}
+#wheel-layout:not([hidden]){display:contents}
+#steering-area{grid-area:wheel;min-width:0;min-height:0;width:100%;height:100%;container-type:size;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#steering-wheel{width:calc(min(100cqw,100cqh - 20px) * var(--control-scale));height:auto;max-width:none;aspect-ratio:1;margin:0;flex:none}
+.steering-label{font-size:10px;margin:4px 0 0;min-height:14px}
+#pedal-area{grid-area:pedals;min-width:0;min-height:0;width:max(160px,calc(100% * var(--control-scale)));height:max(calc(var(--tap) * 2 + var(--deck-gap) * 2 + 56px),calc(100% * var(--control-scale)));max-width:none;align-self:center;justify-self:center;display:grid;grid-template-rows:var(--tap) minmax(0,1fr) var(--tap);gap:var(--deck-gap)}
+#gear-picker{margin:0;padding:3px;min-width:0;border-radius:9px;gap:3px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+#gear-picker button{min-height:0;height:100%;padding:3px;gap:5px;font-size:10px;touch-action:manipulation}
+#gear-picker b{font-size:17px}#gear-picker button[aria-pressed="true"]{background:#8cdbaa;color:#132d1c;box-shadow:inset 0 0 0 1px #b5f8ca}
+body[data-short-controls="true"] #pedal-area{grid-template-columns:1fr 1fr;grid-template-rows:var(--tap) minmax(0,1fr);height:max(88px,calc(100% * var(--control-scale)))}
+body[data-short-controls="true"] #gear-picker{grid-area:1/1;min-height:0}body[data-short-controls="true"] #pedal-area .pedals{grid-area:2/1/3/3}body[data-short-controls="true"] #spin-controls{grid-area:1/2;min-width:0}
+body[data-short-controls="true"] #gear-picker button span,body[data-short-controls="true"] #spin-controls span{display:none}
+body[data-short-controls="true"] #spin-controls svg{width:18px;height:18px}
+#pedal-area .pedals{gap:var(--deck-gap);min-height:0;min-width:0}
+#pedal-area .pedal{min-height:0;min-width:0;border-radius:12px;gap:6px;font-size:clamp(10px,1.3vw,15px);overflow:hidden}
+#pedal-area .pedal svg{height:clamp(24px,10dvh,70px);max-height:50%;width:35px}
+#spin-controls{max-width:none;width:100%;gap:var(--deck-gap);margin:0;min-height:0}
+#spin-controls .hold-button{min-height:0;height:100%;border-radius:9px;flex-direction:row;font-size:clamp(9px,1.2vw,13px);gap:5px;padding:3px}
+#spin-controls svg{width:20px;height:20px;flex:none}
+#buttons-layout{grid-area:controls;width:calc(100% * var(--control-scale));height:calc(100% * var(--control-scale));align-self:center;justify-self:center;display:grid;grid-template-rows:minmax(0,1fr) var(--tap);gap:var(--deck-gap);min-height:0;max-width:none}
+#buttons-layout .dpad{width:100%;max-width:none;min-height:0;min-width:0;height:100%;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:var(--deck-gap)}
+#buttons-layout .drive-button{min-height:0;min-width:0;font-size:clamp(11px,1.7vw,19px);gap:4px;border-radius:12px}
+#buttons-layout .drive-button svg{width:clamp(25px,4vw,50px);height:clamp(25px,7dvh,50px)}
+#buttons-layout .dpad-center{margin:8px;border:0;background:radial-gradient(circle,#29403380,transparent 70%);box-shadow:none}
+#buttons-layout .dpad-center svg{width:clamp(24px,6vw,70px);height:clamp(24px,6vw,70px);opacity:.55}
+body[data-buttons="split"] #buttons-layout .dpad{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr))}
+body[data-buttons="split"] .dpad [data-action="L"]{grid-area:1/1/3/2}body[data-buttons="split"] .dpad [data-action="R"]{grid-area:1/2/3/3}body[data-buttons="split"] .dpad [data-action="F"]{grid-area:1/3/2/5}body[data-buttons="split"] .dpad [data-action="B"]{grid-area:2/3/3/5}body[data-buttons="split"] .dpad-center{display:none}
+body[data-buttons="split"][data-order="mirrored"] .dpad [data-action="L"]{grid-area:1/3/3/4}body[data-buttons="split"][data-order="mirrored"] .dpad [data-action="R"]{grid-area:1/4/3/5}body[data-buttons="split"][data-order="mirrored"] .dpad [data-action="F"]{grid-area:1/1/2/3}body[data-buttons="split"][data-order="mirrored"] .dpad [data-action="B"]{grid-area:2/1/3/3}
+#radar-panel{grid-area:radar;max-width:none;width:100%;height:100%;min-height:0;align-self:stretch;justify-self:stretch;padding:7px;display:flex;flex-direction:column;gap:3px;container-type:size;border-radius:12px;overflow:hidden}
+#radar-panel .radar-title{font-size:8px;min-height:14px;flex:none;letter-spacing:0}#radar-panel #radar-status{font-size:7px;white-space:nowrap}
+#radar-panel .radar-scope{width:min(100cqw,calc(100cqh - 40px));height:min(100cqw,calc(100cqh - 40px));max-width:100%;max-height:100%;aspect-ratio:1;margin:auto;flex:none}
+#radar-panel .radar-bottom{font-size:8px;min-height:18px;flex:none}#radar-panel .radar-bottom strong{font-size:12px}
+#radar-panel .radar-empty{padding:3px;gap:3px}#radar-panel .radar-empty strong{font-size:8px;padding:3px}#radar-panel .radar-empty span{font-size:7px;padding:2px}
+#radar-note,.drive-hint{display:none}
+@container(max-height:105px){#radar-panel .radar-title,#radar-panel .radar-bottom{display:none}#radar-panel .radar-scope{width:min(100cqw,100cqh);height:min(100cqw,100cqh)}#radar-panel .radar-empty strong{font-size:7px}#radar-panel .radar-empty span{display:none}}
+#instrument-rail{grid-area:rail;min-height:0;min-width:0;padding:7px 5px;gap:4px;border-radius:12px}
+.speed-area{min-height:0;min-width:0;gap:7px;padding-bottom:8px}.speed-label{gap:3px}.speed-label label{font-size:9px}.value{font-size:24px}.value small{font-size:10px}
+.speed-area input{min-height:0;min-width:0;height:100%;width:42px;flex:1}.throttle-scale{top:57px;bottom:12px;right:0;font-size:7px}.handbrake-unit{padding-top:3px;flex:none}.handbrake{min-height:0;height:70px;gap:1px}.handbrake svg{height:46px;width:46px}.handbrake strong{font-size:11px}.handbrake>span{font-size:7px}.unlock{min-height:32px;margin-top:4px;font-size:10px;padding:4px}
+body[data-pwm="top"] #instrument-rail,body[data-pwm="bottom"] #instrument-rail{display:grid;grid-template-columns:minmax(0,1fr) 100px;gap:10px;padding:5px 10px}
+body[data-pwm="top"] .speed-area,body[data-pwm="bottom"] .speed-area{flex-direction:row;gap:12px;padding:0;align-items:center}
+body[data-pwm="top"] .speed-label,body[data-pwm="bottom"] .speed-label{width:48px;flex:none;gap:3px}
+body[data-pwm="top"] .speed-area input,body[data-pwm="bottom"] .speed-area input{writing-mode:horizontal-tb;direction:ltr;height:40px;width:100%;min-height:0;cursor:ew-resize}
+body[data-pwm="top"] .speed-area input::-webkit-slider-runnable-track,body[data-pwm="bottom"] .speed-area input::-webkit-slider-runnable-track{height:10px;width:100%;background:linear-gradient(to right,#85cf91 0 var(--pwm),#0a120c var(--pwm) 100%)}
+body[data-pwm="top"] .speed-area input::-webkit-slider-thumb,body[data-pwm="bottom"] .speed-area input::-webkit-slider-thumb{width:25px;height:40px;margin-left:0;margin-top:-16px}
+body[data-pwm="top"] .speed-area input::-moz-range-track,body[data-pwm="bottom"] .speed-area input::-moz-range-track{height:10px;width:100%}
+body[data-pwm="top"] .speed-area input::-moz-range-thumb,body[data-pwm="bottom"] .speed-area input::-moz-range-thumb{width:23px;height:38px}
+body[data-pwm="top"] .throttle-scale,body[data-pwm="bottom"] .throttle-scale{display:none}
+body[data-pwm="top"] .handbrake-unit,body[data-pwm="bottom"] .handbrake-unit{border-top:0;border-left:1px solid #344a3c;padding:0 0 0 7px;min-height:0;display:flex;flex-direction:column;justify-content:center}
+body[data-pwm="top"] .handbrake,body[data-pwm="bottom"] .handbrake{flex-direction:row;height:32px;gap:4px;justify-content:center}
+body[data-pwm="top"] .handbrake svg,body[data-pwm="bottom"] .handbrake svg{width:32px;height:32px}
+body[data-pwm="top"] .handbrake>span,body[data-pwm="bottom"] .handbrake>span{display:none}
+body[data-pwm="top"] .unlock,body[data-pwm="bottom"] .unlock{min-height:24px;padding:1px;margin-top:0}
+.flash-message{flex:none;min-height:0;max-width:100%;max-height:30px;overflow:hidden;font-size:10px}
+#test-panel .test-select-head{margin:0 0 7px;font-size:11px;flex:none}.text-button{min-height:30px;font-size:11px}
+#test-panel .motor-selection{gap:6px;flex:1;min-height:0}#test-panel .motor-check{padding:6px;gap:5px;min-height:0;min-width:0;justify-content:center}#test-panel .motor-check strong{font-size:20px}#test-panel .motor-check small{font-size:9px;text-align:center}#test-panel .motor-check output{font-size:10px}
+#test-panel .test-controls{flex:1;min-height:0;margin-top:8px;gap:8px}#test-panel .test-controls .hold-button{min-height:0}#test-panel .selection-hint{padding-top:5px;margin-top:0;font-size:9px;flex:none}
+.profile-select-label{display:block;font-size:11px;color:#b3c8b8;margin:12px 0 6px}.wide-select,.profile-name,.layout-fields select{width:100%;min-height:40px;max-width:100%;border:1px solid #3e5a42;border-radius:9px;background:#102015;color:var(--text);padding:8px 10px;font-size:12px}.profile-name{margin-bottom:10px}
+.orientation-picker{display:flex;gap:5px;margin-top:14px}.orientation-picker button{border:1px solid #3e5a42;background:#172c20;color:#a7c3ac;border-radius:8px;padding:8px 20px;min-height:38px}.orientation-picker button[aria-pressed="true"]{background:#34543c;color:#c5f4d0}
+.layout-preview{border:1px solid #365744;background:#0c1812;border-radius:12px;padding:8px;margin:12px auto;width:100%;height:150px}.layout-preview[data-orientation="portrait"]{width:180px;height:210px}
+#preview-board{display:grid;width:100%;height:100%;gap:4px}#preview-stage{grid-area:main;display:grid;gap:4px;min-height:0;min-width:0}
+#preview-board span{display:flex;align-items:center;justify-content:center;min-height:0;min-width:0;font-size:9px;border:1px solid #50745b;background:#243a2b;border-radius:5px;color:#d2e9d7;padding:2px;text-align:center;overflow:hidden}
+#preview-controls{grid-area:controls}#preview-wheel{grid-area:wheel}#preview-pedals{grid-area:pedals}#preview-radar{grid-area:radar;background:#173f31!important}#preview-pwm{grid-area:rail;word-break:break-word;background:#3e3c29!important}
+.layout-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.layout-fields label{font-size:11px;color:#b3c8b8;min-width:0}.layout-fields select{margin-top:5px;font-size:11px;padding:8px 5px}.layout-range{display:block;margin:14px 0;font-size:12px}.layout-range span{display:flex;justify-content:space-between}.layout-range output{color:var(--accent);font:12px ui-monospace,monospace}.layout-range input{width:100%;margin:8px 0 0;accent-color:var(--accent);min-height:28px}.profile-actions{display:flex;flex-wrap:wrap;gap:7px}.profile-actions button{font-size:11px;min-height:36px;padding:6px 9px}
+@media(orientation:landscape){.shell{gap:6px}.card-head{margin-bottom:5px}#buttons-layout .dpad-center{margin:4px}}
+@media(max-height:400px){.brand-icon{width:32px;height:32px}.brand h1{font-size:17px}.topbar{min-height:34px}.top-actions button{min-height:34px}.brand p{font-size:8px}.card-head,#test-panel .card-head{min-height:18px;margin-bottom:4px}.section-title{font-size:11px}.motion{font-size:8px}.handbrake{height:56px}.handbrake svg{width:34px;height:34px}.handbrake>span{display:none}.speed-label label{font-size:8px}.value{font-size:20px}.throttle-scale{top:50px}.flash-message{max-height:15px;font-size:9px}#test-panel .selection-hint{display:none}#test-panel .motor-check small{font-size:8px}.dialog-head{padding:12px 16px}.dialog-head h2{font-size:20px}.dialog-foot{padding:8px 16px}.settings-body{padding:0 16px}}
+@media(max-width:400px){.topbar{gap:4px}.brand p{font-size:8px}.brand-icon{width:33px;height:33px}.brand h1{font-size:18px}.top-actions{gap:4px}.top-actions button{padding:5px 9px}.mode-readout{font-size:7px}.section-title{font-size:12px}.card-head{flex-wrap:wrap;gap:3px}.motion{font-size:8px}.settings-body{padding:0 15px}.dialog-head{padding:15px}.dialog-foot{padding:10px 15px}#radar-panel .radar-title{font-size:6px}#radar-panel #radar-status{font-size:6px}#radar-panel .radar-empty span{display:none}#gear-picker button{font-size:9px}#gear-picker b{font-size:15px}#spin-controls .hold-button{font-size:9px;gap:3px}}
 </style></head><body>
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
 <symbol id="i-rover" viewbox="0 0 24 24"><rect height="16" rx="3" width="10" x="7" y="4"></rect><path d="M9.5 8h5M9.5 16h5M4 6v3m16-3v3M4 15v3m16-3v3M4 7.5h3m10 0h3M4 16.5h3m10 0h3"></path></symbol>
@@ -51,10 +141,9 @@ dialog{color:var(--text);background:#14211d;border:1px solid #4a6050;border-radi
 <symbol id="i-spin-left" viewbox="0 0 24 24"><path d="M5 11a7 7 0 1 1 1 5M5 5v6h6"></path></symbol><symbol id="i-spin-right" viewbox="0 0 24 24"><path d="M19 11a7 7 0 1 0-1 5M19 5v6h-6"></path></symbol></svg>
 <main class="shell">
 <header class="topbar"><div class="brand"><img alt="Autko Rover z radarem" class="brand-icon" height="64" src="./assets/rover-mark.webp" width="64"/><div><h1>Rover<span style="color:var(--accent)">.</span></h1><p id="connection-label">Rozłączono</p></div></div><div class="top-actions"><button class="outline" id="connect-toggle" type="button">Połącz</button><button aria-haspopup="dialog" aria-label="Ustawienia" class="icon-button" id="settings-open" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 7h16M4 17h16"></path><circle cx="8" cy="7" fill="currentColor" r="3"></circle><circle cx="16" cy="17" fill="currentColor" r="3"></circle></svg></button></div></header>
-
-<div class="workdeck"><section aria-labelledby="drive-title" class="card control-card" id="drive-panel">
-<div class="card-head"><h2 class="section-title" id="drive-title">Sterowanie</h2><span class="mode-readout" id="drive-mode-label">PRZYCISKI</span><span aria-live="polite" class="motion" id="drive-motion" role="status">Postój</span></div><div class="drive-stage"><div class="classic-controls" id="buttons-layout"><div aria-label="Cztery przyciski kierunku" class="dpad"><button aria-label="Przód, przytrzymaj" class="drive-button hold-button" data-action="F" data-method="buttons" data-mode="drive" type="button"><svg aria-hidden="true"><use href="#i-up"></use></svg><span>Przód</span></button><button aria-label="Lewo, przytrzymaj" class="drive-button hold-button" data-action="L" data-method="buttons" data-mode="drive" type="button"><svg aria-hidden="true"><use href="#i-left"></use></svg><span>Lewo</span></button><button aria-label="Prawo, przytrzymaj" class="drive-button hold-button" data-action="R" data-method="buttons" data-mode="drive" type="button"><svg aria-hidden="true"><use href="#i-right"></use></svg><span>Prawo</span></button><button aria-label="Tył, przytrzymaj" class="drive-button hold-button" data-action="B" data-method="buttons" data-mode="drive" type="button"><svg aria-hidden="true"><use href="#i-down"></use></svg><span>Tył</span></button><div aria-hidden="true" class="dpad-center"><svg><use href="#i-rover"></use></svg></div></div><div class="spin-controls" id="spin-controls"><button aria-label="Obrót w miejscu · lewo, przytrzymaj" class="drive-button hold-button" data-action="SL" data-method="any" data-mode="drive" type="button"><svg aria-hidden="true"><use href="#i-spin-left"></use></svg><span>Obrót L</span></button><button aria-label="Obrót w miejscu · prawo, przytrzymaj" class="drive-button hold-button" data-action="SR" data-method="any" data-mode="drive" type="button"><svg aria-hidden="true"><use href="#i-spin-right"></use></svg><span>Obrót P</span></button></div></div><div class="car-controls" hidden="" id="wheel-layout">
-<div class="steering-area"><div aria-label="Kierownica" aria-valuemax="100" aria-valuemin="-100" aria-valuenow="0" aria-valuetext="Na wprost" class="wheel" id="steering-wheel" role="slider" tabindex="0">
+<div class="workdeck" id="workdeck"><section aria-labelledby="drive-title" class="card control-card" id="drive-panel">
+<div class="card-head"><h2 class="section-title" id="drive-title">Sterowanie</h2><span class="mode-readout" id="drive-mode-label">PRZYCISKI</span><span aria-live="polite" class="motion" id="drive-motion" role="status">Postój</span></div><div class="drive-stage" id="drive-stage"><div class="classic-controls" id="buttons-layout"><div aria-label="Cztery przyciski kierunku" class="dpad"><button aria-label="Przód, przytrzymaj" class="drive-button hold-button" data-action="F" data-method="buttons" data-mode="drive" type="button"><svg aria-hidden="true"><use href="#i-up"></use></svg><span>Przód</span></button><button aria-label="Lewo, przytrzymaj" class="drive-button hold-button" data-action="L" data-method="buttons" data-mode="drive" type="button"><svg aria-hidden="true"><use href="#i-left"></use></svg><span>Lewo</span></button><button aria-label="Prawo, przytrzymaj" class="drive-button hold-button" data-action="R" data-method="buttons" data-mode="drive" type="button"><svg aria-hidden="true"><use href="#i-right"></use></svg><span>Prawo</span></button><button aria-label="Tył, przytrzymaj" class="drive-button hold-button" data-action="B" data-method="buttons" data-mode="drive" type="button"><svg aria-hidden="true"><use href="#i-down"></use></svg><span>Tył</span></button><div aria-hidden="true" class="dpad-center"><svg><use href="#i-rover"></use></svg></div></div><div class="spin-controls" id="spin-controls"><button aria-label="Obrót w miejscu · lewo, przytrzymaj" class="drive-button hold-button" data-action="SL" data-method="any" data-mode="drive" type="button"><svg aria-hidden="true"><use href="#i-spin-left"></use></svg><span>Obrót L</span></button><button aria-label="Obrót w miejscu · prawo, przytrzymaj" class="drive-button hold-button" data-action="SR" data-method="any" data-mode="drive" type="button"><svg aria-hidden="true"><use href="#i-spin-right"></use></svg><span>Obrót P</span></button></div></div><div class="car-controls" hidden="" id="wheel-layout">
+<div class="steering-area" id="steering-area"><div aria-label="Kierownica" aria-valuemax="100" aria-valuemin="-100" aria-valuenow="0" aria-valuetext="Na wprost" class="wheel" id="steering-wheel" role="slider" tabindex="0">
 <svg aria-hidden="true" id="wheel-art" viewbox="0 0 280 280">
 <defs>
 <lineargradient id="wheel-rim" x1="0" x2="0.8" y1="0" y2="1"><stop stop-color="#657974"></stop><stop offset=".2" stop-color="#23322e"></stop><stop offset=".7" stop-color="#101a17"></stop><stop offset="1" stop-color="#3d5049"></stop></lineargradient>
@@ -75,30 +164,20 @@ dialog{color:var(--text);background:#14211d;border:1px solid #4a6050;border-radi
 <path d="m140 121-13 29 13-6 13 6Z" fill="#90e5b0" stroke="none"></path>
 </svg>
 </div><div class="steering-label" id="steering-label">Na wprost</div></div>
-<div class="pedal-area" id="pedal-area"><div class="gear-readout"><span>BIEG</span><strong id="gear-readout">D</strong><span id="gear-description">PRZÓD</span></div><div class="pedals">
+<div class="pedal-area" id="pedal-area"><div aria-label="Kierunek jazdy" class="gear-picker" id="gear-picker" role="group"><button aria-label="Bieg D · Przód" aria-pressed="true" id="gear-forward" type="button"><b>D</b><span>Przód</span></button><button aria-label="Bieg R · Tył" aria-pressed="false" id="gear-reverse" type="button"><b>R</b><span>Tył</span></button></div><div class="pedals">
 <button aria-label="Hamulec, przytrzymaj" class="drive-button hold-button pedal pedal-brake" data-action="BRAKE" data-method="wheel" data-mode="drive" type="button"><svg aria-hidden="true" viewbox="0 0 40 66"><rect height="48" rx="6" width="32" x="4" y="9"></rect><path d="M11 20h18M11 28h18M11 36h18M11 44h18"></path></svg><span>HAMULEC</span></button>
 <button aria-label="Gaz, przytrzymaj" class="drive-button hold-button pedal pedal-gas" data-action="GAS" data-method="wheel" data-mode="drive" type="button"><svg aria-hidden="true" viewbox="0 0 40 66"><rect height="60" rx="6" width="22" x="9" y="3"></rect><path d="M15 14h10M15 23h10M15 32h10M15 41h10M15 50h10"></path></svg><span>GAZ</span></button>
 </div></div></div><section aria-label="Radar ultradźwiękowy" class="radar-panel" hidden="" id="radar-panel"><div class="radar-title"><span>SONAR / 360°</span><span id="radar-status">BRAK DANYCH</span></div><div class="radar-scope"><div aria-hidden="true" class="radar-sweep"></div><svg aria-label="Okrągła siatka odległości" id="radar-art" viewbox="0 0 260 260"><g class="radar-grid"><circle cx="130" cy="130" r="110"></circle><circle cx="130" cy="130" r="88"></circle><circle cx="130" cy="130" r="66"></circle><circle cx="130" cy="130" r="44"></circle><circle cx="130" cy="130" r="22"></circle><path d="M130 20v220M20 130h220M52 52l156 156M52 208 208 52"></path></g><g class="radar-ticks" id="radar-ticks"><path d="M130.00 17.00L130.00 10.00"></path><path d="M150.14 15.76L150.84 11.82"></path><path d="M169.67 21.00L171.04 17.24"></path><path d="M186.50 32.14L190.00 26.08"></path><path d="M204.56 41.14L207.13 38.07"></path><path d="M218.86 55.44L221.93 52.87"></path><path d="M227.86 73.50L233.92 70.00"></path><path d="M239.00 90.33L242.76 88.96"></path><path d="M244.24 109.86L248.18 109.16"></path><path d="M243.00 130.00L250.00 130.00"></path><path d="M244.24 150.14L248.18 150.84"></path><path d="M239.00 169.67L242.76 171.04"></path><path d="M227.86 186.50L233.92 190.00"></path><path d="M218.86 204.56L221.93 207.13"></path><path d="M204.56 218.86L207.13 221.93"></path><path d="M186.50 227.86L190.00 233.92"></path><path d="M169.67 239.00L171.04 242.76"></path><path d="M150.14 244.24L150.84 248.18"></path><path d="M130.00 243.00L130.00 250.00"></path><path d="M109.86 244.24L109.16 248.18"></path><path d="M90.33 239.00L88.96 242.76"></path><path d="M73.50 227.86L70.00 233.92"></path><path d="M55.44 218.86L52.87 221.93"></path><path d="M41.14 204.56L38.07 207.13"></path><path d="M32.14 186.50L26.08 190.00"></path><path d="M21.00 169.67L17.24 171.04"></path><path d="M15.76 150.14L11.82 150.84"></path><path d="M17.00 130.00L10.00 130.00"></path><path d="M15.76 109.86L11.82 109.16"></path><path d="M21.00 90.33L17.24 88.96"></path><path d="M32.14 73.50L26.08 70.00"></path><path d="M41.14 55.44L38.07 52.87"></path><path d="M55.44 41.14L52.87 38.07"></path><path d="M73.50 32.14L70.00 26.08"></path><path d="M90.33 21.00L88.96 17.24"></path><path d="M109.86 15.76L109.16 11.82"></path></g><g class="radar-distances"><text id="ring-1" x="133" y="104">5</text><text id="ring-2" x="133" y="82">10</text><text id="ring-3" x="133" y="60">15</text><text id="ring-4" x="133" y="38">20</text><text id="ring-5" x="133" y="16">25 cm</text></g><g class="radar-bearings"><text x="248" y="134">90°</text><text x="130" y="255">180°</text><text x="10" y="134">270°</text></g><circle class="radar-origin" cx="130" cy="130" r="3"></circle><g id="radar-points" visibility="hidden"><circle cx="83" cy="81" r="4"></circle><circle cx="175" cy="103" r="4"></circle><circle cx="105" cy="173" r="4"></circle></g></svg><div class="radar-empty" id="radar-empty"><strong>Oczekiwanie na czujniki</strong><span>Brak pomiarów odległości</span></div></div><div class="radar-bottom"><span id="radar-scale-label">5 cm / pierścień</span><strong id="radar-distance">— cm</strong></div><p id="radar-note">Podgląd pomiarów będzie dostępny po dodaniu czujników.</p></section></div>
-
-
-
-
 <p class="caption drive-hint" id="drive-hint">Przytrzymaj przód lub tył i drugim palcem dodaj skręt.</p>
-
 </section><section aria-labelledby="test-title" class="card control-card" hidden="" id="test-panel">
 <div class="card-head"><h2 class="section-title" id="test-title">Test silników</h2><span aria-live="polite" class="motion" id="test-motion" role="status">Postój</span></div>
 <div class="test-select-head"><span>Wybierz silniki</span><div class="text-actions"><button class="text-button" id="select-all" type="button">Wszystkie</button><button class="text-button" id="select-none" type="button">Żaden</button></div></div>
 <div class="motor-selection"><label class="motor-check" id="motor-1"><input checked="" name="motor" type="checkbox" value="1"/><strong>M1</strong><small class="wheel-position">Prawy przód</small><output>STOP</output></label><label class="motor-check" id="motor-2"><input name="motor" type="checkbox" value="2"/><strong>M2</strong><small class="wheel-position">Lewy przód</small><output>STOP</output></label><label class="motor-check" id="motor-3"><input name="motor" type="checkbox" value="4"/><strong>M3</strong><small class="wheel-position">Lewy tył</small><output>STOP</output></label><label class="motor-check" id="motor-4"><input name="motor" type="checkbox" value="8"/><strong>M4</strong><small class="wheel-position">Prawy tył</small><output>STOP</output></label></div>
-
 <div class="test-controls"><button aria-label="Przód, przytrzymaj" class="drive-button hold-button" data-action="F" data-mode="test" type="button"><svg aria-hidden="true" style="transform:rotate(0deg)"><use href="#i-up"></use></svg><span>Przód</span></button><button aria-label="Tył, przytrzymaj" class="drive-button hold-button" data-action="B" data-mode="test" type="button"><svg aria-hidden="true" style="transform:rotate(0deg)"><use href="#i-down"></use></svg><span>Tył</span></button></div>
 <p class="selection-hint" id="selection-hint">M1–M4 odpowiadają zaciskom shielda. Wybierz silniki i przytrzymaj kierunek.</p>
-
-</section><aside aria-label="Prędkość i zatrzymanie" class="instrument-rail"><div class="speed-area" id="drive-speed-area"><div class="speed-label"><label for="drive-speed">PWM</label><output class="value" for="drive-speed"><span id="drive-speed-value">50</span><small>%</small></output></div><input aria-label="Prędkość · PWM" aria-valuetext="50 procent" id="drive-speed" max="100" min="0" orient="vertical" step="1" type="range" value="50"/><div aria-hidden="true" class="throttle-scale"><span>100</span><span>0</span></div></div><div class="speed-area" id="test-speed-area"><div class="speed-label"><label for="test-speed">TEST PWM</label><output class="value" for="test-speed"><span id="test-speed-value">50</span><small>%</small></output></div><input aria-valuetext="50 procent" id="test-speed" max="100" min="0" orient="vertical" step="1" type="range" value="50"/><div aria-hidden="true" class="throttle-scale"><span>100</span><span>0</span></div></div><div class="handbrake-unit"><button aria-label="STOP awaryjny — zaciągnij ręczny" aria-pressed="false" class="handbrake" id="emergency-stop" type="button"><svg aria-hidden="true" viewbox="0 0 90 90"><defs><lineargradient id="lever-metal" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#a9b9b8"></stop><stop offset=".45" stop-color="#394948"></stop><stop offset="1" stop-color="#708380"></stop></lineargradient></defs><path d="M15 69h60l6 10H9Z" fill="#162421" stroke="#52615b"></path><g class="lever-arm"><path d="m40 66 11-32 9 4-10 34Z" fill="url(#lever-metal)"></path><rect fill="#833936" height="34" rx="8" stroke="#e58e82" width="23" x="44" y="16"></rect><path d="M50 22h11M50 28h11M50 34h11" opacity=".7" stroke="#f4b3a0"></path></g><circle cx="44" cy="69" fill="#0d1716" r="7" stroke="#8b9c91"></circle></svg><strong>STOP</strong><span id="brake-label">RĘCZNY</span></button><div class="lock-panel" hidden="" id="lock-panel"><button class="unlock" id="unlock" type="button">Zwolnij</button></div></div></aside></div>
-
+</section><aside aria-label="Prędkość i zatrzymanie" class="instrument-rail" id="instrument-rail"><div class="speed-area" id="drive-speed-area"><div class="speed-label"><label for="drive-speed">PWM</label><output class="value" for="drive-speed"><span id="drive-speed-value">50</span><small>%</small></output></div><input aria-label="Prędkość · PWM" aria-valuetext="50 procent" id="drive-speed" max="100" min="0" orient="vertical" step="1" type="range" value="50"/><div aria-hidden="true" class="throttle-scale"><span>100</span><span>0</span></div></div><div class="speed-area" id="test-speed-area"><div class="speed-label"><label for="test-speed">TEST PWM</label><output class="value" for="test-speed"><span id="test-speed-value">50</span><small>%</small></output></div><input aria-valuetext="50 procent" id="test-speed" max="100" min="0" orient="vertical" step="1" type="range" value="50"/><div aria-hidden="true" class="throttle-scale"><span>100</span><span>0</span></div></div><div class="handbrake-unit"><button aria-label="STOP awaryjny — zaciągnij ręczny" aria-pressed="false" class="handbrake" id="emergency-stop" type="button"><svg aria-hidden="true" viewbox="0 0 90 90"><defs><lineargradient id="lever-metal" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#a9b9b8"></stop><stop offset=".45" stop-color="#394948"></stop><stop offset="1" stop-color="#708380"></stop></lineargradient></defs><path d="M15 69h60l6 10H9Z" fill="#162421" stroke="#52615b"></path><g class="lever-arm"><path d="m40 66 11-32 9 4-10 34Z" fill="url(#lever-metal)"></path><rect fill="#833936" height="34" rx="8" stroke="#e58e82" width="23" x="44" y="16"></rect><path d="M50 22h11M50 28h11M50 34h11" opacity=".7" stroke="#f4b3a0"></path></g><circle cx="44" cy="69" fill="#0d1716" r="7" stroke="#8b9c91"></circle></svg><strong>STOP</strong><span id="brake-label">RĘCZNY</span></button><div class="lock-panel" hidden="" id="lock-panel"><button class="unlock" id="unlock" type="button">Zwolnij</button></div></div></aside></div>
 <p aria-live="polite" class="flash-message" id="control-message" role="status"></p>
-
 </main>
-
 <dialog aria-labelledby="install-title" class="install-dialog" id="install-help">
 <form method="dialog"><button aria-label="Zamknij instrukcję instalacji" class="outline dialog-close">Zamknij</button></form>
 <h2 id="install-title">Rover na ekranie głównym</h2>
@@ -111,11 +190,62 @@ dialog{color:var(--text);background:#14211d;border:1px solid #4a6050;border-radi
 <div class="dialog-head"><div><p class="eyebrow">ROVER / PANEL STEROWANIA</p><h2 id="settings-title">Ustawienia</h2></div><button aria-label="Zamknij ustawienia" class="icon-button" id="settings-close" type="button">✕</button></div>
 <div class="settings-body">
 <section class="settings-section"><h3>Tryb pracy</h3><nav aria-label="Tryb sterowania" class="mode-tabs"><button aria-pressed="true" id="mode-drive" type="button"><svg aria-hidden="true"><use href="#i-rover"></use></svg>Jazda</button><button aria-pressed="false" id="mode-test" type="button"><svg aria-hidden="true"><use href="#i-test"></use></svg>Test silników</button></nav></section>
-<section class="settings-section" id="drive-settings"><h3>Sterowanie</h3><div aria-label="Metoda sterowania" class="method-picker"><button aria-pressed="true" id="method-buttons" type="button">Przyciski</button><button aria-pressed="false" id="method-wheel" type="button">Kierownica</button></div><div id="gear-setting"><p class="gear-label">Kierunek jazdy</p><div aria-label="Skrzynia biegów" class="gear-picker"><button aria-pressed="true" id="gear-forward" type="button"><b>D</b> Przód</button><button aria-pressed="false" id="gear-reverse" type="button"><b>R</b> Tył</button></div></div><label class="setting-toggle"><input id="latch-buttons" type="checkbox"/><span>Podtrzymanie kierunku<small>Dotknij, aby włączyć. Dotknij ponownie, aby puścić.</small></span></label><p class="setting-hint">Działa dla przycisków kierunku. Przód i tył można łączyć ze skrętem.</p></section>
+<section class="settings-section" id="drive-settings"><h3>Sterowanie</h3><div aria-label="Metoda sterowania" class="method-picker"><button aria-pressed="true" id="method-buttons" type="button">Przyciski</button><button aria-pressed="false" id="method-wheel" type="button">Kierownica</button></div><label class="setting-toggle"><input id="latch-buttons" type="checkbox"/><span>Podtrzymuj przód / tył<small>Dotknij, aby włączyć jazdę. Dotknij ponownie, aby zwolnić.</small></span></label><label class="setting-toggle"><input id="latch-steering" type="checkbox"/><span>Podtrzymuj lewo / prawo<small>Domyślnie wyłączone: skręt kończy się po puszczeniu przycisku.</small></span></label><p class="setting-hint">Działa dla przycisków kierunku. Przód i tył można łączyć ze skrętem.</p></section><section class="settings-section" id="layout-settings">
+<h3>Układ ekranu <span class="future-badge">PROFILE</span></h3>
+<label class="profile-select-label" for="layout-profile">Gotowy lub własny profil</label>
+<select class="wide-select" id="layout-profile"></select>
+<div aria-label="Edytowana orientacja" class="orientation-picker"><button aria-pressed="true" id="edit-landscape" type="button">Poziom</button><button aria-pressed="false" id="edit-portrait" type="button">Pion</button></div>
+<p class="setting-hint" id="layout-edit-hint"></p>
+<div aria-label="Podgląd rozmieszczenia elementów" class="layout-preview" id="layout-preview" role="img"><div id="preview-board"><div id="preview-stage"><span id="preview-controls">Przyciski</span><span id="preview-wheel">Kierownica</span><span id="preview-pedals">Pedały</span><span id="preview-radar">Radar</span></div><span id="preview-pwm">PWM / STOP</span></div></div>
+<div class="layout-fields">
+<label>Przyciski kierunku<select id="layout-buttons"><option value="split">Dwa kciuki</option><option value="cross">Krzyż</option></select></label>
+<label>Strony sterowania<select id="layout-order"><option value="normal">Skręt po lewej</option><option value="mirrored">Skręt po prawej</option></select></label>
+<label>Suwak PWM<select id="layout-pwm"><option value="right">Pionowo · prawa</option><option value="left">Pionowo · lewa</option><option value="bottom">Poziomo · dół</option><option value="top">Poziomo · góra</option></select></label>
+<label>Rozmiar panelu PWM<select id="layout-rail"><option value="compact">Mały</option><option value="normal">Średni</option><option value="large">Duży</option></select></label>
+<label>Pozycja radaru<select id="layout-radar"><option value="center">Automatycznie</option><option value="left">Po lewej</option><option value="right">Po prawej</option><option value="top">U góry</option><option value="bottom">Na dole</option></select></label>
+<label>Odstępy<select id="layout-gap"><option value="compact">Małe</option><option value="comfortable">Większe</option></select></label>
+</div>
+<label class="setting-toggle"><input id="layout-radar-visible" type="checkbox"/><span>Radar w tym układzie</span></label>
+<label class="layout-range" for="layout-radar-size"><span>Udział radaru <output id="layout-radar-size-value"></output></span><input id="layout-radar-size" max="50" min="25" step="5" type="range"/></label>
+<label class="layout-range" for="layout-wheel-size"><span>Miejsce na kierownicę <output id="layout-wheel-size-value"></output></span><input id="layout-wheel-size" max="65" min="35" step="5" type="range"/></label>
+<label class="layout-range" for="layout-control-size"><span>Wielkość sterowania <output id="layout-control-size-value"></output></span><input id="layout-control-size" max="100" min="75" step="5" type="range"/></label>
+<p class="setting-hint">100% wykorzystuje całe pole sterowania. Przy małej wysokości ekranu proporcje dopasują się tak, aby zachować miejsce na przyciski. Profil zawiera pion i poziom. Po zmianie układu auto stoi.</p>
+<label class="profile-select-label" for="profile-name">Nazwa własnego profilu</label><input autocomplete="off" class="profile-name" id="profile-name" maxlength="32" placeholder="Np. Telefon · radar" type="text"/>
+<div class="profile-actions"><button class="primary" id="profile-new" type="button">Zapisz jako nowy</button><button class="outline" id="profile-save" type="button">Zapisz zmiany</button><button class="outline" id="profile-reset" type="button">Przywróć profil</button><button class="text-button" id="profile-delete" type="button">Usuń własny profil</button></div>
+<p aria-live="polite" class="setting-hint" id="profile-status" role="status"></p>
+</section>
+
 <section class="settings-section"><h3>Radar</h3><label class="setting-toggle"><input id="radar-enabled" type="checkbox"/><span>Radar obok sterowania<small>Zmienia układ ekranu jazdy.</small></span></label><div class="setting-row"><label for="radar-step">Odstęp pierścieni</label><select id="radar-step"><option value="5">5 cm</option><option value="10">10 cm</option><option value="25">25 cm</option><option value="50">50 cm</option></select></div><label class="setting-toggle"><input id="radar-demo" type="checkbox"/><span>Podgląd demonstracyjny<small>Punkty przykładowe, bez odczytów z czujników.</small></span></label></section>
-<section class="settings-section"><h3>Połączenie</h3><label class="setting-toggle"><input checked="" id="auto-connect" type="checkbox"/><span>Łącz z ostatnim urządzeniem</span></label><p class="setting-hint" id="remembered-device"></p><p class="connection-help">Bluetooth SPP · JDY-31. Przed połączeniem zamknij terminal Bluetooth na telefonie.</p><details class="diagnostics"><summary>Połączenie · ostatnia odpowiedź</summary><output id="last-reply">Brak odpowiedzi</output></details></section>
-<section class="settings-section"><h3>Aplikacja</h3><button class="outline" id="install-app" type="button">Dodaj do ekranu głównego</button><p class="setting-hint">W ustawieniach telefonu możesz zezwolić na obracanie ekranu.</p><p class="setting-hint" id="keyboard-hint"></p></section>
-<div class="settings-footer"><span>Rover / 0.7</span><span id="control-style"></span></div>
+<section class="settings-section"><h3>Autopilot <span class="future-badge">PO DODANIU CZUJNIKÓW</span></h3><label class="setting-toggle"><input id="autopilot-lock" type="checkbox"/><span>Blokuj sterowanie ręczne podczas autopilota<small>Wyłączone: ruch ręcznym sterowaniem wyłączy autopilota i pozwoli przejąć jazdę. Włączone: najpierw trzeba wyłączyć autopilota.</small></span></label><p class="setting-hint">STOP awaryjny pozostanie dostępny zawsze. To ustawienie jest przygotowane do przyszłych trybów autonomicznych.</p></section><section class="settings-section"><h3>Połączenie</h3><label class="setting-toggle"><input checked="" id="auto-connect" type="checkbox"/><span>Łącz z ostatnim urządzeniem</span></label><p class="setting-hint" id="remembered-device"></p><details class="connection-guide" id="pairing-guide">
+<summary>Jak połączyć autko?</summary>
+<p>Włącz autko i Bluetooth w telefonie lub komputerze. Moduł na liście urządzeń to <strong>JDY-31-SPP</strong> (nazwa może zostać zmieniona).</p>
+<p>PIN parowania: <strong>1234</strong>. Niektóre moduły mają <strong>0000</strong>; jeśli PIN był zmieniany, użyj własnego.</p>
+<details open=""><summary>Android · telefon lub tablet</summary>
+<ol><li>Użyj aktualnego <strong>Google Chrome</strong> (obsługa tego połączenia od wersji 138).</li><li>W ustawieniach Bluetooth telefonu sparuj urządzenie <strong>JDY-31-SPP</strong>.</li><li>Otwórz <strong>Ustawienia telefonu → Aplikacje → Chrome → Uprawnienia → Urządzenia w pobliżu</strong> i zezwól na dostęp. Nazwy pozycji mogą się różnić między telefonami.</li><li>Po nadaniu uprawnień <strong>zamknij całkowicie przeglądarkę i uruchom ją ponownie</strong>. Zamknij też uruchomiony wcześniej skrót Rovera.</li><li>Otwórz Rovera pod jego adresem <strong>HTTPS</strong>. Dotknij <strong>Połącz</strong>, wybierz moduł i zatwierdź dostęp do niego.</li></ol>
+</details>
+<details><summary>Windows · komputer</summary>
+<ol><li>W ustawieniach Windows otwórz <strong>Bluetooth i urządzenia → Dodaj urządzenie → Bluetooth</strong>, wybierz moduł i podaj PIN.</li><li>Otwórz adres HTTPS aplikacji w aktualnym <strong>Chrome lub Microsoft Edge</strong>.</li><li>Naciśnij <strong>Połącz</strong>, wybierz urządzenie Bluetooth i zatwierdź dostęp. Komputer musi mieć działający adapter Bluetooth.</li></ol>
+</details>
+<details><summary>macOS · Mac</summary>
+<ol><li>Włącz Bluetooth i sparuj moduł w ustawieniach systemowych.</li><li>Użyj aktualnego <strong>Chrome lub Microsoft Edge</strong>. Zezwól przeglądarce na Bluetooth w <strong>Prywatność i ochrona → Bluetooth</strong>.</li><li>Po zmianie uprawnień zakończ przeglądarkę i uruchom ją ponownie. Otwórz Rovera przez HTTPS, wybierz <strong>Połącz</strong> i wskaż moduł.</li></ol>
+</details>
+<details><summary>ChromeOS / Linux</summary>
+<p>Użyj aktualnego Chrome, sparuj moduł w ustawieniach Bluetooth systemu, a następnie otwórz stronę HTTPS i wybierz <strong>Połącz</strong>. Dostępność modułu zależy również od adaptera i obsługi Bluetooth w systemie.</p>
+</details>
+<details><summary>iPhone / iPad i pozostałe przeglądarki</summary>
+<p>Safari oraz przeglądarki na iOS/iPadOS korzystające z WebKit nie obsługują wymaganego połączenia. Możesz obejrzeć interfejs, ale do jazdy z obecnym modułem użyj Androida z Chrome lub zgodnego komputera.</p>
+<p>Firefox nie obsługuje używanego tutaj wyboru urządzeń Bluetooth SPP. W innych przeglądarkach dostępność funkcji może się różnić — zalecamy Chrome, a na komputerze również Edge.</p>
+</details>
+<details><summary>Zgodność i pomoc</summary>
+<div class="compat-table"><table><thead><tr><th>Platforma</th><th>Połączenie z obecnym modułem</th></tr></thead><tbody><tr><td>Android</td><td>Chrome 138 lub nowszy</td></tr><tr><td>Windows / macOS</td><td>Aktualny Chrome lub Edge</td></tr><tr><td>ChromeOS / Linux</td><td>Aktualny Chrome; zależnie od obsługi Bluetooth w systemie</td></tr><tr><td>iOS / iPadOS · WebKit</td><td>Brak obsługi</td></tr><tr><td>Firefox</td><td>Brak obsługi wymaganego wyboru Bluetooth SPP</td></tr></tbody></table></div>
+<p id="browser-support"></p><p>Gdy lista urządzeń jest pusta: sprawdź zasilanie auta, parowanie w systemie i uprawnienia przeglądarki, a następnie uruchom przeglądarkę ponownie.</p>
+<p>Skrót na ekranie głównym korzysta z możliwości przeglądarki, w której został zainstalowany.</p>
+<p class="help-sources">Dokumentacja: <a href="https://developer.chrome.com/release-notes/138#web_serial_over_bluetooth_on_android" rel="noopener noreferrer" target="_blank">Chrome na Androidzie</a> · <a href="https://developer.chrome.com/blog/serial-over-bluetooth/" rel="noopener noreferrer" target="_blank">Bluetooth na komputerze</a> · <a href="https://developer.mozilla.org/en-US/docs/Web/API/Serial/requestPort#browser_compatibility" rel="noopener noreferrer" target="_blank">Zgodność przeglądarek</a></p>
+</details>
+</details>
+<details class="diagnostics"><summary>Połączenie · ostatnia odpowiedź</summary><output id="last-reply">Brak odpowiedzi</output></details></section>
+<section class="settings-section"><h3>Aplikacja</h3><p class="app-version">Wersja <span id="app-version">0.9.0</span></p><div class="app-tools"><button class="outline" id="check-update" type="button">Sprawdź aktualizację</button><button class="outline" id="install-app" type="button">Dodaj do ekranu głównego</button></div><p aria-live="polite" class="update-status" id="update-status" role="status"></p><p class="setting-hint">Sprawdzanie zatrzymuje auto. Aktualizacja wymaga internetu; zachowuje ustawienia i nie wymaga odinstalowania skrótu.</p><p class="setting-hint">W ustawieniach telefonu możesz zezwolić na obracanie ekranu.</p><p class="setting-hint" id="keyboard-hint"></p></section>
+<div class="settings-footer"><span>Rover / 0.9</span><span id="control-style"></span></div>
 </div><div class="dialog-foot"><button class="primary" id="settings-done" type="button">Wróć do sterowania</button></div></dialog><script>
 'use strict';
 /* Web Serial / Bluetooth SPP. One motion frame awaiting ACK; STOP preempts it. */
@@ -143,7 +273,7 @@ class RoverSerial {
    this.status('handshake','Sprawdzanie programu STM32…');
    const ready=new Promise((resolve,reject)=>{this.helloResolve=resolve;this.helloReject=reject;});
    // Attach timeout handling before the reader can reject the promise.
-   const readyTimed=this.withTimeout(ready,3500,'Brak odpowiedzi programu Rover V4. Sprawdź zasilanie auta i zamknij inne aplikacje korzystające z modułu.');
+   const readyTimed=this.withTimeout(ready,3500,'Brak odpowiedzi programu Rover V4. Sprawdź zasilanie auta i sprawdź połączenie Bluetooth korzystające z modułu.');
    this.readTask=this.readLoop(generation);
    this.writer.write(new TextEncoder().encode(`V4 H ${this.session}\n`)).catch(e=>this.helloReject?.(e));
    await readyTimed;
@@ -287,10 +417,148 @@ class RoverSerial {
  const STORAGE_KEY='rover-settings-v1';
  let stored={};
  try{stored=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')||{};}catch(_){}
- const preferences={latch:stored.latch===true,autoConnect:stored.autoConnect!==false,
+ const preferences={latch:stored.latch===true,autoConnect:stored.autoConnect!==false,latchSteering:stored.latchSteering===true,autopilotLock:stored.autopilotLock===true,
   method:stored.method==='wheel'?'wheel':'buttons',radar:stored.radar===true,radarStep:[5,10,25,50].includes(stored.radarStep)?stored.radarStep:5,
   last:stored.last&&stored.last.kind==='bluetooth'&&typeof stored.last.signature==='string'?stored.last:null};
- let rememberedPort=null,autoTimer=null,autoPaused=false,autoRunning=false,autoGeneration=0,autoAttempts=0;
+ // Przechowuje profile i osobne układy dla obu orientacji ekranu.
+ const LAYOUT_KEY='rover-layouts-v1';
+ const copy=value=>JSON.parse(JSON.stringify(value));
+ const baseLayout={radar:false,radarPosition:'center',radarShare:30,controlOrder:'normal',buttonLayout:'split',controlSize:100,wheelShare:55,pwmPosition:'right',pwmSize:'normal',gap:'compact'};
+ const pair=(landscape={},portrait={})=>({landscape:{...baseLayout,...landscape},portrait:{...baseLayout,buttonLayout:'cross',radarPosition:'top',...portrait}});
+ const presets=[
+  {id:'balanced',name:'Klasyczny',layouts:pair({buttonLayout:'cross'},{})},
+  {id:'thumbs',name:'Dwa kciuki',layouts:pair({pwmPosition:'bottom'},{buttonLayout:'split',pwmPosition:'bottom'})},
+  {id:'sonar',name:'Radar',layouts:pair({radar:true,radarShare:40,pwmPosition:'bottom'},{radar:true,radarShare:30})},
+  {id:'mirror',name:'Odwrotne strony',layouts:pair({controlOrder:'mirrored',pwmPosition:'left'},{controlOrder:'mirrored',buttonLayout:'split',pwmPosition:'left'})}
+ ];
+ function cleanLayout(raw,fallback=baseLayout){
+  raw=raw&&typeof raw==='object'?raw:{};const result={...fallback};
+  const enums={radarPosition:['center','left','right','top','bottom'],controlOrder:['normal','mirrored'],buttonLayout:['cross','split'],pwmPosition:['left','right','top','bottom'],pwmSize:['compact','normal','large'],gap:['compact','comfortable']};
+  for(const [key,values]of Object.entries(enums))if(values.includes(raw[key]))result[key]=raw[key];
+  for(const [key,min,max]of [['radarShare',25,50],['wheelShare',35,65],['controlSize',75,100]])if(Number.isFinite(raw[key]))result[key]=Math.max(min,Math.min(max,Math.round(raw[key]/5)*5));
+  if(typeof raw.radar==='boolean')result.radar=raw.radar;return result;
+ }
+ const cleanPair=raw=>({landscape:cleanLayout(raw?.landscape,presets[0].layouts.landscape),portrait:cleanLayout(raw?.portrait,presets[0].layouts.portrait)});
+ const cleanName=value=>typeof value==='string'?value.replace(/[\u0000-\u001f\u007f]/g,'').trim().slice(0,32):'';
+ let savedLayouts={};try{savedLayouts=JSON.parse(localStorage.getItem(LAYOUT_KEY)||'{}')||{};}catch(_){}
+ const customProfiles=[],seenIds=new Set();
+ for(const profile of (Array.isArray(savedLayouts.custom)?savedLayouts.custom:[]).slice(0,12)){
+  if(!profile||typeof profile.id!=='string'||!/^custom-[a-z0-9-]+$/.test(profile.id)||seenIds.has(profile.id)||!cleanName(profile.name))continue;
+  seenIds.add(profile.id);customProfiles.push({id:profile.id,name:cleanName(profile.name),layouts:cleanPair(profile.layouts)});
+ }
+ const allProfiles=()=>[...presets,...customProfiles];
+ const selected=allProfiles().some(p=>p.id===savedLayouts.selected)?savedLayouts.selected:'balanced';
+ const initialPair=copy(allProfiles().find(p=>p.id===selected).layouts);
+ if(!savedLayouts.working)for(const key of ['landscape','portrait'])initialPair[key].radar=preferences.radar;
+ const layoutStore={selected,working:savedLayouts.working?cleanPair(savedLayouts.working):initialPair,custom:customProfiles};
+ const layoutOrientation=()=>window.matchMedia('(orientation: landscape)').matches?'landscape':'portrait';
+ let editOrientation=layoutOrientation(),layoutNotice='';
+ const activeLayout=()=>layoutStore.working[layoutOrientation()];
+ function fittedLayout(config,orientation=layoutOrientation()){
+  const fitted={...config},horizontal=['top','bottom'].includes(config.pwmPosition);
+  const rail={compact:60,normal:76,large:92}[config.pwmSize];
+  if(config.radar&&orientation===layoutOrientation()){
+   if(orientation==='landscape'&&['top','bottom'].includes(config.radarPosition)&&window.innerHeight-(horizontal?rail:0)<350)fitted.radarPosition='right';
+   if(orientation==='portrait'&&['left','right'].includes(config.radarPosition)&&(window.innerWidth-36-(horizontal?0:rail))*(100-config.radarShare)/100<180)fitted.radarPosition='top';
+  }
+  return fitted;
+ }
+ function saveLayouts(){try{localStorage.setItem(LAYOUT_KEY,JSON.stringify(layoutStore));return true;}catch(_){layoutNotice='Układ działa, ale przeglądarka nie pozwoliła go zapisać.';return false;}}
+ function profileDirty(){return JSON.stringify(layoutStore.working)!==JSON.stringify(allProfiles().find(p=>p.id===layoutStore.selected)?.layouts);}
+ // Wyznacza pola siatki bez nakładania sterowania na radar.
+ function layoutGrid(config,method,orientation,preview=false){
+  const landscape=orientation==='landscape',wheelMode=method==='wheel';
+  const first=config.controlOrder==='mirrored'?'pedals':'wheel',second=first==='wheel'?'pedals':'wheel';
+  const share=name=>name==='wheel'?config.wheelShare:100-config.wheelShare;
+  const fr=n=>'minmax(0,'+n+'fr)',rad=config.radarShare,left=100-rad;
+  const pedalTrack=n=>preview?fr(n):'minmax(calc(var(--tap) * 2 + var(--deck-gap) * 2 + 56px),'+n+'fr)';
+  const column=(name,n)=>name==='pedals'&&!preview?'minmax(160px,'+n+'fr)':fr(n);
+  const row=names=>'"'+names.join(' ')+'"';
+  if(!wheelMode){
+   if(!config.radar)return{areas:'"controls"',cols:'minmax(0,1fr)',rows:'minmax(0,1fr)'};
+   const pos=config.radarPosition==='center'?(landscape?'right':'top'):config.radarPosition;
+   const before=pos==='left'||pos==='top',horizontal=pos==='left'||pos==='right';
+   const names=before?['radar','controls']:['controls','radar'];const sizes=(before?[rad,left]:[left,rad]).map(fr).join(' ');
+   return{areas:horizontal?row(names):names.map(n=>row([n])).join(' '),cols:horizontal?sizes:'minmax(0,1fr)',rows:horizontal?'minmax(0,1fr)':sizes};
+  }
+  if(!config.radar)return landscape?{areas:row([first,second]),cols:[first,second].map(n=>column(n,share(n))).join(' '),rows:fr(1)}:{areas:'"wheel" "pedals"',cols:fr(1),rows:fr(config.wheelShare)+' '+pedalTrack(100-config.wheelShare)};
+  const pos=config.radarPosition;
+  if(landscape&&['center','left','right'].includes(pos)){
+   const names=pos==='center'?[first,'radar',second]:pos==='left'?['radar',first,second]:[first,second,'radar'];
+   return{areas:row(names),cols:names.map(n=>column(n,n==='radar'?rad:left*share(n)/100)).join(' '),rows:fr(1)};
+  }
+  if(landscape){const up=pos==='top',controls=preview?fr(left):'minmax(112px,'+left+'fr)';return{areas:up?'"radar radar" '+row([first,second]):row([first,second])+' "radar radar"',cols:[share(first),share(second)].map(fr).join(' '),rows:up?fr(rad)+' '+controls:controls+' '+fr(rad)};}
+  if(['left','right'].includes(pos)){const l=pos==='left';return{areas:l?'"radar wheel" "radar pedals"':'"wheel radar" "pedals radar"',cols:(l?[rad,left]:[left,rad]).map(fr).join(' '),rows:fr(config.wheelShare)+' '+pedalTrack(100-config.wheelShare)};}
+  const names=pos==='top'?['radar','wheel','pedals']:pos==='bottom'?['wheel','pedals','radar']:['wheel','radar','pedals'];
+  return{areas:names.map(n=>row([n])).join(' '),cols:fr(1),rows:names.map(n=>n==='pedals'?pedalTrack(left*share(n)/100):fr(n==='radar'?rad:left*share(n)/100)).join(' ')};
+ }
+ function placeGrid(element,plan){element.style.gridTemplateAreas=plan.areas;element.style.gridTemplateColumns=plan.cols;element.style.gridTemplateRows=plan.rows;}
+ function railGrid(config,preview=false){
+  const horizontal=['top','bottom'].includes(config.pwmPosition),before=['left','top'].includes(config.pwmPosition);
+  const size=preview?(horizontal?'25px':'30px'):(horizontal?{compact:64,normal:76,large:90}:{compact:60,normal:76,large:92})[config.pwmSize]+'px';
+  const names=before?['rail','main']:['main','rail'];const sizes=before?size+' minmax(0,1fr)':'minmax(0,1fr) '+size;
+  return{areas:horizontal?names.map(n=>'"'+n+'"').join(' '):'"'+names.join(' ')+'"',cols:horizontal?'minmax(0,1fr)':sizes,rows:horizontal?sizes:'minmax(0,1fr)'};
+ }
+ function applyLayout(){
+  const config=fittedLayout(activeLayout());preferences.radar=config.radar;
+  document.body.dataset.pwm=config.pwmPosition;document.body.dataset.buttons=config.buttonLayout;document.body.dataset.order=config.controlOrder;
+  document.body.dataset.shortControls=String(state.method==='wheel'&&layoutOrientation()==='landscape'&&((config.radar&&['top','bottom'].includes(config.radarPosition))||(['top','bottom'].includes(config.pwmPosition)&&window.innerHeight<440)));
+  document.body.style.setProperty('--control-scale',config.controlSize/100);
+  document.body.style.setProperty('--deck-gap',config.gap==='compact'?'6px':'12px');
+  placeGrid($('workdeck'),railGrid(config));placeGrid($('drive-stage'),layoutGrid(config,state.method,layoutOrientation()));
+  for(const [id,area]of [['steering-area','wheel'],['pedal-area','pedals'],['radar-panel','radar'],['buttons-layout','controls']])$(id).style.gridArea=area;
+  for(const mode of ['drive','test'])$(mode+'-speed').setAttribute('aria-orientation',['left','right'].includes(config.pwmPosition)?'vertical':'horizontal');
+ }
+ function drawLayoutPreview(){
+  const config=fittedLayout(layoutStore.working[editOrientation],editOrientation);
+  $('layout-preview').dataset.orientation=editOrientation;
+  placeGrid($('preview-board'),railGrid(config,true));placeGrid($('preview-stage'),layoutGrid(config,state.method,editOrientation,true));
+  $('preview-controls').hidden=state.method!=='buttons';$('preview-wheel').hidden=state.method!=='wheel';$('preview-pedals').hidden=state.method!=='wheel';$('preview-radar').hidden=!config.radar;
+  setText('preview-controls',config.buttonLayout==='split'?'Dwa kciuki':'Krzyż');
+ }
+ function renderProfileOptions(){
+  const select=$('layout-profile');select.replaceChildren();
+  for(const p of allProfiles()){const option=document.createElement('option');option.value=p.id;option.textContent=(p.id.startsWith('custom-')?'Własny · ':'')+p.name;select.append(option);}
+  select.value=layoutStore.selected;
+ }
+ function syncLayoutEditor(){
+  const config=layoutStore.working[editOrientation];
+  const controls={buttons:'buttonLayout',order:'controlOrder',pwm:'pwmPosition',rail:'pwmSize',radar:'radarPosition',gap:'gap','radar-size':'radarShare','wheel-size':'wheelShare','control-size':'controlSize'};
+  for(const [id,key]of Object.entries(controls))$('layout-'+id).value=String(config[key]);
+  $('layout-radar-visible').checked=config.radar;
+  for(const key of ['landscape','portrait'])$('edit-'+key).setAttribute('aria-pressed',String(editOrientation===key));
+  for(const [id,key]of [['radar-size','radarShare'],['wheel-size','wheelShare'],['control-size','controlSize']])setText('layout-'+id+'-value',config[key]+'%');
+  $('layout-radar-size').disabled=!config.radar;$('layout-radar').disabled=!config.radar;$('layout-wheel-size').disabled=state.method!=='wheel';
+  $('layout-buttons').disabled=state.method!=='buttons';
+  $('layout-order').disabled=state.method==='buttons'&&config.buttonLayout==='cross';
+  const custom=layoutStore.selected.startsWith('custom-');$('profile-save').disabled=!custom;$('profile-delete').disabled=!custom;
+  setText('layout-edit-hint','Edytujesz '+(editOrientation==='landscape'?'poziom':'pion')+'. '+(editOrientation===layoutOrientation()?'Zmiany zobaczysz po zamknięciu ustawień.':'Ten wariant włączy się po obróceniu ekranu.'));
+  if(fittedLayout(config,editOrientation).radarPosition!==config.radarPosition)setText('layout-edit-hint','Edytujesz '+(editOrientation==='landscape'?'poziom':'pion')+'. Na tym ekranie radar automatycznie zmienia pozycję, aby zachować miejsce na sterowanie.');
+  setText('profile-status',layoutNotice||(profileDirty()?'Bieżący układ zapamiętany. Zapisz go jako profil lub nadpisz własny.':'Profil aktywny. Możesz zapisać do 12 własnych profili.'));
+  drawLayoutPreview();
+ }
+ function editLayout(key,value){stop();layoutNotice='';layoutStore.working[editOrientation]=cleanLayout({...layoutStore.working[editOrientation],[key]:value});saveLayouts();render();}
+ function setupLayoutEditor(){
+  renderProfileOptions();
+  $('layout-profile').addEventListener('change',event=>{const id=event.target.value,p=allProfiles().find(p=>p.id===id);if(!p)return;stop();layoutNotice='';layoutStore.selected=id;layoutStore.working=copy(p.layouts);$('profile-name').value=p.id.startsWith('custom-')?p.name:'';saveLayouts();render();});
+  for(const key of ['landscape','portrait'])$('edit-'+key).addEventListener('click',()=>{editOrientation=key;syncLayoutEditor();});
+  for(const [id,key]of Object.entries({buttons:'buttonLayout',order:'controlOrder',pwm:'pwmPosition',rail:'pwmSize',radar:'radarPosition',gap:'gap'}))$('layout-'+id).addEventListener('change',e=>editLayout(key,e.target.value));
+  for(const [id,key]of [['radar-size','radarShare'],['wheel-size','wheelShare'],['control-size','controlSize']])$('layout-'+id).addEventListener('input',e=>editLayout(key,Number(e.target.value)));
+  $('layout-radar-visible').addEventListener('change',e=>editLayout('radar',e.target.checked));
+  $('profile-new').addEventListener('click',()=>{
+   stop();const name=cleanName($('profile-name').value);if(!name){layoutNotice='Wpisz nazwę nowego profilu.';syncLayoutEditor();$('profile-name').focus();return;}
+   if(customProfiles.length>=12){layoutNotice='Masz już 12 własnych profili. Nadpisz lub usuń jeden z nich.';syncLayoutEditor();return;}
+   const id='custom-'+(crypto.randomUUID?.()||Date.now().toString(36)+'-'+Math.random().toString(36).slice(2));customProfiles.push({id,name,layouts:copy(layoutStore.working)});layoutStore.selected=id;layoutNotice='Profil zapisany: '+name;saveLayouts();renderProfileOptions();render();
+  });
+  $('profile-save').addEventListener('click',()=>{const p=customProfiles.find(p=>p.id===layoutStore.selected);if(!p)return;stop();p.name=cleanName($('profile-name').value)||p.name;p.layouts=copy(layoutStore.working);layoutNotice='Zapisano zmiany profilu.';saveLayouts();renderProfileOptions();render();});
+  $('profile-reset').addEventListener('click',()=>{stop();layoutStore.working=copy(allProfiles().find(p=>p.id===layoutStore.selected).layouts);layoutNotice='Przywrócono zapisany układ profilu.';saveLayouts();render();});
+  $('profile-delete').addEventListener('click',()=>{const i=customProfiles.findIndex(p=>p.id===layoutStore.selected);if(i<0)return;stop();customProfiles.splice(i,1);layoutStore.selected='balanced';layoutStore.working=copy(presets[0].layouts);$('profile-name').value='';layoutNotice='Usunięto własny profil. Włączono układ klasyczny.';saveLayouts();renderProfileOptions();render();});
+  const p=customProfiles.find(p=>p.id===layoutStore.selected);if(p)$('profile-name').value=p.name;
+ }
+
+ let updatedReload=false;
+ try{updatedReload=sessionStorage.getItem('rover-update-reload')==='1';sessionStorage.removeItem('rover-update-reload');}catch(_){}
+ let rememberedPort=null,autoTimer=null,autoPaused=updatedReload,autoRunning=false,autoGeneration=0,autoAttempts=0;
  function savePreferences(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(preferences));}catch(_){} }
  function portSignature(port){
   const info=port.getInfo();
@@ -311,7 +579,7 @@ class RoverSerial {
   ++autoGeneration;clearTimeout(autoTimer);autoTimer=null;
  }
  function mayAutoConnect(){
-  return preferences.autoConnect&&preferences.last&&!autoPaused&&!state.locked&&!document.hidden&&
+  return preferences.autoConnect&&preferences.last&&!autoPaused&&!state.updating&&!state.locked&&!document.hidden&&
    transport.phase==='idle'&&window.isSecureContext&&typeof navigator.serial?.getPorts==='function';
  }
  function selectRememberedPort(ports){
@@ -351,7 +619,7 @@ class RoverSerial {
  }
 
  const transport=new RoverSerial(connectionState,line=>setText('last-reply',line));
- const state={radarDemo:false,mode:'drive',method:preferences.method,gear:1,driveSpeed:50,testSpeed:50,mask:1,
+ const state={updating:false,radarDemo:false,mode:'drive',method:preferences.method,gear:1,driveSpeed:50,testSpeed:50,mask:1,
   locked:false,held:new Map(),latched:new Set(),lastBeat:0,lastFrame:'',wheelAngle:0,wheelPointer:null,wheelLastAngle:0};
  const hasInput=()=>state.held.size>0||state.latched.size>0||state.wheelPointer!==null;
  function clearInputs(){state.held.clear();state.latched.clear();state.wheelPointer=null;state.wheelAngle=0;}
@@ -364,7 +632,7 @@ class RoverSerial {
    spin:Number(list.includes('SR'))-Number(list.includes('SL')),spinHeld:list.includes('SL')||list.includes('SR')};
  }
  function currentCommand(){
-  if(!transport.connected||state.locked||modalOpen())return stopCommand();
+  if(!transport.connected||state.locked||state.updating||modalOpen())return stopCommand();
   const i=inputs();
   if(state.mode==='drive'&&state.method==='wheel'&&i.brake)return{type:'brake',pwm:0};
   const pwm=state.mode==='drive'?state.driveSpeed:state.testSpeed;
@@ -408,7 +676,7 @@ class RoverSerial {
   }
   spin.querySelectorAll('span').forEach((span,index)=>span.textContent='Obrót '+(index?'P':'L'));
   $('latch-buttons').checked=preferences.latch;$('auto-connect').checked=preferences.autoConnect;
-  const latchedMode=preferences.latch&&state.mode==='drive'&&state.method==='buttons';
+  const latchedMode=(preferences.latch||preferences.latchSteering)&&state.mode==='drive'&&state.method==='buttons';
   setText('control-style',latchedMode?'Podtrzymanie kierunku włączone':'Bluetooth · sterowanie podczas trzymania');
   $('drive-panel').hidden=state.mode!=='drive';$('test-panel').hidden=state.mode!=='test';
   $('buttons-layout').hidden=state.method!=='buttons';$('wheel-layout').hidden=state.method!=='wheel';
@@ -417,7 +685,7 @@ class RoverSerial {
   $('gear-forward').setAttribute('aria-pressed',String(state.gear===1));$('gear-reverse').setAttribute('aria-pressed',String(state.gear===-1));
   $('lock-panel').hidden=!state.locked;$('emergency-stop').setAttribute('aria-pressed',String(state.locked));
   setText('connect-toggle',transport.connected?'Rozłącz':'Połącz');
-  $('connect-toggle').disabled=!['idle','connected'].includes(transport.phase);
+  $('connect-toggle').disabled=state.updating||!['idle','connected'].includes(transport.phase);
   document.body.dataset.connection=transport.phase;
   const phaseLabels={idle:'Rozłączono',connecting:'Wybór urządzenia…',handshake:'Sprawdzanie STM32…',connected:'Połączono z autem',closing:'Rozłączanie…',fault:'Utrata połączenia'};
   setText('connection-label',phaseLabels[transport.phase]||'Rozłączono');
@@ -426,15 +694,15 @@ class RoverSerial {
   setText('keyboard-hint',state.method==='buttons'?'WASD / strzałki · Q / E obrót':'W / ↑ gaz · S / ↓ hamulec · A / D skręt · Q / E obrót');
   buttons.forEach(button=>{
    const methodOK=!button.dataset.method||button.dataset.method==='any'||button.dataset.method===state.method;
-   const enabled=transport.connected&&!state.locked&&!modalOpen()&&button.dataset.mode===state.mode&&methodOK&&!(state.mode==='test'&&!state.mask);
+   const enabled=transport.connected&&!state.locked&&!state.updating&&!modalOpen()&&button.dataset.mode===state.mode&&methodOK&&!(state.mode==='test'&&!state.mask);
    const pressed=enabled&&([...state.held.values()].includes(button.dataset.action)||state.latched.has(button.dataset.action));
    if(button.dataset.method==='buttons'){
     const name={F:'Przód',B:'Tył',L:'Lewo',R:'Prawo'}[button.dataset.action];
-    button.setAttribute('aria-label',name+(latchedMode?', dotknij aby włączyć lub wyłączyć':', przytrzymaj'));
+    button.setAttribute('aria-label',name+(latchedMode&&(['L','R'].includes(button.dataset.action)?preferences.latchSteering:preferences.latch)?', dotknij aby włączyć lub wyłączyć':', przytrzymaj'));
    }
    button.classList.toggle('is-held',pressed);button.setAttribute('aria-pressed',String(pressed));button.disabled=!enabled;
   });
-  const wheelEnabled=transport.connected&&!state.locked&&!modalOpen()&&state.mode==='drive'&&state.method==='wheel';
+  const wheelEnabled=transport.connected&&!state.locked&&!state.updating&&!modalOpen()&&state.mode==='drive'&&state.method==='wheel';
   wheel.setAttribute('aria-disabled',String(!wheelEnabled));wheel.tabIndex=wheelEnabled?0:-1;
   const steer=inputs().steer;
   $('wheel-art').style.transform=`rotate(${steer/100*MAX_WHEEL_DEG}deg)`;
@@ -448,7 +716,7 @@ class RoverSerial {
  }
  function stop(message=''){clearInputs();publish(true);render();setText('control-message',message);}
  function readyForInput(){
-  if(!transport.connected||state.locked||document.hidden||modalOpen())return false;
+  if(!transport.connected||state.locked||state.updating||document.hidden||modalOpen())return false;
   if(hasInput()&&performance.now()-state.lastBeat>GAP_LIMIT_MS){stop('Przerwa w działaniu strony. Przytrzymaj sterowanie ponownie.');return false;}
   transport.tick();if(!transport.connected)return false;
   if(!hasInput())state.lastBeat=performance.now();
@@ -458,7 +726,7 @@ class RoverSerial {
   if(!readyForInput())return;
   const allowed=state.mode==='test'?['F','B']:state.method==='wheel'?['GAS','BRAKE','L','R','SL','SR']:['F','B','L','R','SL','SR'];
   if(!allowed.includes(action)||(state.mode==='test'&&!state.mask))return;
-  if(preferences.latch&&state.mode==='drive'&&state.method==='buttons'&&action in actions){
+  if((['L','R'].includes(action)?preferences.latchSteering:preferences.latch)&&state.mode==='drive'&&state.method==='buttons'&&action in actions){
    if(state.latched.has(action))state.latched.delete(action);
    else{state.latched.delete({F:'B',B:'F',L:'R',R:'L'}[action]);state.latched.add(action);}
   }else{
@@ -509,6 +777,7 @@ class RoverSerial {
  document.addEventListener('pointercancel',()=>{if(state.latched.size)stop();});
  const keys={KeyW:'F',ArrowUp:'F',KeyS:'B',ArrowDown:'B',KeyA:'L',ArrowLeft:'L',KeyD:'R',ArrowRight:'R',KeyQ:'SL',KeyE:'SR'};
  document.addEventListener('keydown',event=>{
+  if(event.target.closest('#gear-picker')&&(event.code==='Space'||event.code==='Enter'))return;
   if(modalOpen())return;
   if(event.code==='Escape'||event.code==='Space'){
    if(event.code==='Space'&&event.target instanceof HTMLInputElement){if(hasInput())emergencyStop();return;}
@@ -528,6 +797,7 @@ class RoverSerial {
  // Zatrzymuje jazdę przy zmianie układu ekranu.
  function stopForLayoutChange(){
   if(hasInput())stop('Zmieniono układ ekranu. Przytrzymaj sterowanie ponownie.');
+  render();
  }
  window.screen?.orientation?.addEventListener('change',stopForLayoutChange);
  const orientation=window.matchMedia('(orientation: landscape)');
@@ -538,7 +808,7 @@ class RoverSerial {
  });
  // Okno ustawień zatrzymuje auto i zwalnia aktywne przyciski.
  function modalOpen(){return $('settings-dialog').open||$('install-help').open;}
- function openSettings(){stop();$('settings-dialog').showModal();render();}
+ function openSettings(){stop();editOrientation=layoutOrientation();$('settings-dialog').showModal();render();}
  function closeSettings(){$('settings-dialog').close();render();}
  $('settings-open').addEventListener('click',openSettings);
  $('settings-close').addEventListener('click',closeSettings);
@@ -547,11 +817,11 @@ class RoverSerial {
  $('install-help').addEventListener('close',()=>{clearInputs();publish(true);render();});
  // Radar jest widokiem dodatkowym. Demo nigdy nie udaje danych z auta.
  $('radar-enabled').addEventListener('change',event=>{
-  const enabled=event.target.checked;stop();preferences.radar=enabled;savePreferences();render();
+  const enabled=event.target.checked;stop();layoutNotice='';activeLayout().radar=enabled;saveLayouts();render();
  });
  $('radar-demo').addEventListener('change',event=>{
   const enabled=event.target.checked;stop();state.radarDemo=enabled;
-  if(enabled)preferences.radar=true;
+  if(enabled){activeLayout().radar=true;saveLayouts();}
   savePreferences();render();
  });
  $('radar-step').addEventListener('change',event=>{
@@ -559,6 +829,8 @@ class RoverSerial {
   stop();preferences.radarStep=step;savePreferences();render();
  });
  function renderCockpit(){
+  applyLayout();
+  if($('settings-dialog').open)syncLayoutEditor();
   const radar=preferences.radar&&state.mode==='drive';
   document.body.dataset.radar=String(radar);
   document.body.dataset.locked=String(state.locked);
@@ -575,11 +847,13 @@ class RoverSerial {
   setText('radar-scale-label',preferences.radarStep+' cm / pierścień');
   for(let i=1;i<=5;i++)setText('ring-'+i,String(preferences.radarStep*i)+(i===5?' cm':''));
   $('drive-settings').hidden=state.mode!=='drive';
-  $('gear-setting').hidden=state.method!=='wheel';
+  $('gear-forward').disabled=state.updating;$('gear-reverse').disabled=state.updating;
+  $('autopilot-lock').checked=preferences.autopilotLock;
+  $('check-update').disabled=state.updating;
+  setText('check-update',state.updating?'Aktualizowanie…':'Sprawdź aktualizację');
   $('latch-buttons').disabled=state.method!=='buttons';
-  setText('gear-readout',state.gear===1?'D':'R');
-  setText('gear-description',state.gear===1?'PRZÓD':'TYŁ');
-  setText('drive-mode-label',state.method==='wheel'?'KIEROWNICA':preferences.latch?'PRZYCISKI · PODTRZYMANIE':'PRZYCISKI');
+  $('latch-steering').checked=preferences.latchSteering;$('latch-steering').disabled=state.method!=='buttons';
+  setText('drive-mode-label',state.method==='wheel'?'KIEROWNICA':(preferences.latch||preferences.latchSteering)?'PRZYCISKI · PODTRZYMANIE':'PRZYCISKI');
   setText('brake-label',state.locked?'ZACIĄGNIĘTY':'RĘCZNY');
   $('emergency-stop').setAttribute('aria-label',state.locked?'STOP awaryjny aktywny':'STOP awaryjny — zaciągnij ręczny');
   for(const mode of ['drive','test']){
@@ -611,14 +885,84 @@ class RoverSerial {
  });
  updateInstallButton();
 
- // Zapisuje pliki panelu do późniejszego uruchamiania bez internetu.
- if('serviceWorker' in navigator && window.isSecureContext && location.protocol!=='file:'){
-  window.addEventListener('load',()=>{
-   navigator.serviceWorker.register('./sw.js').catch(()=>{});
+ // Sprawdza wersję aplikacji i uruchamia aktualizację na żądanie.
+ const APP_VERSION='0.9.0', APP_BUILD='r678d08ca9d958de3';
+ let swRegistrationPromise=null;
+ function ensureServiceWorker(){
+  if(!('serviceWorker' in navigator)||!window.isSecureContext||location.protocol==='file:')return Promise.resolve(null);
+  if(!swRegistrationPromise){
+   swRegistrationPromise=navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'})
+    .catch(error=>{swRegistrationPromise=null;throw error;});
+  }
+  return swRegistrationPromise;
+ }
+ window.addEventListener('load',()=>{void ensureServiceWorker().catch(()=>{});});
+ function waitForWorker(worker,accepted){
+  return new Promise((resolve,reject)=>{
+   let timer;
+   const finish=error=>{clearTimeout(timer);worker.removeEventListener('statechange',changed);error?reject(error):resolve();};
+   const changed=()=>{
+    if(accepted.includes(worker.state))finish();
+    else if(worker.state==='redundant')finish(new Error('Nie udało się przygotować plików aktualizacji. Spróbuj ponownie.'));
+   };
+   timer=setTimeout(()=>finish(new Error('Aktualizacja trwa zbyt długo. Sprawdź internet i spróbuj ponownie.')),15000);
+   worker.addEventListener('statechange',changed);changed();
   });
  }
+ async function fetchRelease(){
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),10000);
+  try{
+   const url=new URL('./version.json',location.href);
+   url.searchParams.set('check',String(Date.now()));
+   const response=await fetch(url,{cache:'no-store',signal:controller.signal});
+   if(!response.ok)throw new Error('Nie można sprawdzić wersji. Sprawdź internet i komplet plików strony.');
+   const release=await response.json();
+   if(!/^\d+\.\d+\.\d+$/.test(release.version)||!/^r[0-9a-f]{16}$/.test(release.build))throw new Error('Nieprawidłowa informacja o wersji. Spróbuj po zakończeniu publikacji strony.');
+   return release;
+  }finally{clearTimeout(timer);}
+ }
+ async function checkForUpdate(){
+  if(state.updating)return;
+  if(location.protocol==='file:'){setText('update-status','Aktualizacje działają po otwarciu aplikacji z jej adresu internetowego.');return;}
+  state.updating=true;cancelAutoConnect();stop();
+  setText('update-status','Sprawdzanie dostępnej wersji…');
+  let reloading=false;
+  try{
+   const release=await fetchRelease();
+   const registration=await ensureServiceWorker();
+   if(registration)await registration.update();
+   if(registration?.installing)await waitForWorker(registration.installing,['installed','activated']);
+   const waiting=registration?.waiting;
+   if(release.build===APP_BUILD&&!waiting){setText('update-status','Masz aktualną wersję '+APP_VERSION+'.');return;}
+   autoPaused=true;cancelAutoConnect();
+   setText('update-status','Przygotowywanie wersji '+release.version+'. Auto pozostaje zatrzymane…');
+   await transport.disconnect();
+   if(waiting){
+    const activated=waitForWorker(waiting,['activated']);
+    waiting.postMessage({type:'ROVER_ACTIVATE_UPDATE'});
+    await activated;
+   }
+   try{sessionStorage.setItem('rover-update-reload','1');}catch(_){}
+   const url=new URL(location.href);url.searchParams.set('rv',release.build);
+   setText('update-status','Otwieranie wersji '+release.version+'…');
+   reloading=true;location.replace(url.href);
+  }catch(error){
+   setText('update-status',error.name==='AbortError'?'Brak odpowiedzi serwera. Sprawdź internet i spróbuj ponownie.':error.message||'Brak połączenia z internetem. Spróbuj ponownie.');
+  }finally{
+   if(!reloading){state.updating=false;render();}
+  }
+ }
+ $('check-update').addEventListener('click',()=>{void checkForUpdate();});
+ setText('app-version',APP_VERSION);
+ // Zapamiętuje zasadę przejmowania sterowania dla przyszłych trybów autonomicznych.
+ $('autopilot-lock').addEventListener('change',event=>{
+  const enabled=event.target.checked;stop();preferences.autopilotLock=enabled;savePreferences();render();
+ });
  for(const method of ['buttons','wheel'])$('method-'+method).addEventListener('click',()=>{if(state.method===method)return;stop();state.method=method;preferences.method=method;savePreferences();render();});
- [['gear-forward',1],['gear-reverse',-1]].forEach(([id,gear])=>$(id).addEventListener('click',()=>{if(state.gear===gear)return;stop();state.gear=gear;render();}));
+ // Zmienia bieg jednym dotknięciem i zwalnia gaz.
+ [['gear-forward',1],['gear-reverse',-1]].forEach(([id,gear])=>$(id).addEventListener('click',()=>{if(state.updating||state.gear===gear)return;stop();state.gear=gear;render();}));
+ $('latch-steering').addEventListener('change',event=>{const enabled=event.target.checked;stop();preferences.latchSteering=enabled;savePreferences();render();});
  ['drive','test'].forEach(mode=>{
   $('mode-'+mode).addEventListener('click',()=>{if(state.mode===mode)return;stop();state.mode=mode;render();});
   $(mode+'-speed').addEventListener('input',event=>{
@@ -636,6 +980,7 @@ class RoverSerial {
  $('emergency-stop').addEventListener('click',emergencyStop);$('unlock').addEventListener('click',()=>{state.locked=false;stop();});
  $('emergency-stop').addEventListener('pointerdown',event=>{if(event.button===0)emergencyStop();});
  $('connect-toggle').addEventListener('click',async()=>{
+  if(state.updating)return;
   cancelAutoConnect();autoPaused=true;stop();
   try{if(transport.connected)await transport.disconnect();else await transport.connect('bluetooth');}
   catch(error){setText('control-message',error.message);}
@@ -658,8 +1003,13 @@ class RoverSerial {
 
  navigator.serial?.addEventListener?.('connect',()=>{autoAttempts=0;scheduleAutoConnect(300);});
 
+ setText('browser-support',!window.isSecureContext?'Otwórz aplikację pod adresem HTTPS.':
+  typeof navigator.serial?.requestPort!=='function'?'Ta przeglądarka nie udostępnia wymaganego połączenia.':
+  'Przeglądarka udostępnia połączenia szeregowe. Przycisk Połącz pozwoli sprawdzić dostępność modułu Bluetooth.');
+ setupLayoutEditor();
  showRememberedDevice();
  render();scheduleAutoConnect(350);
+ if(updatedReload)setText('control-message','Uruchomiono wersję '+APP_VERSION+'. Auto zatrzymane — naciśnij Połącz.');
  if(!window.isSecureContext||!navigator.serial)setText('control-message','Do połączenia użyj adresu HTTPS i aktualnego Chrome na Androidzie lub komputerze.');
 })();
 </script>

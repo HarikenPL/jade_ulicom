@@ -2,7 +2,7 @@
 // Przechowuje wyłącznie pliki panelu; nie obsługuje komend autka.
 const BASE = new URL('./', self.location.href);
 const PREFIX = 'rover-panel:' + BASE.href + ':';
-const CACHE = PREFIX + '0.7.0';
+const CACHE = PREFIX + '0.9.0-r678d08ca9d958de3';
 const INDEX = new URL('index.html', BASE).href;
 const FILES = ['index.html', 'manifest.webmanifest', 'icons/rover-192.png', 'icons/rover-512.png', 'assets/rover-mark.webp']
   .map(path => new URL(path, BASE).href);
@@ -43,4 +43,9 @@ self.addEventListener('fetch', event => {
       });
     }
   })());
+});
+
+// Nowa wersja przejmuje obsługę dopiero po wybraniu aktualizacji.
+self.addEventListener('message', event => {
+  if (event.data?.type === 'ROVER_ACTIVATE_UPDATE') event.waitUntil(self.skipWaiting());
 });
