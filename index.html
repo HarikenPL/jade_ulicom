@@ -128,6 +128,70 @@ body[data-pwm="top"] .unlock,body[data-pwm="bottom"] .unlock{min-height:24px;pad
 @media(orientation:landscape){.shell{gap:6px}.card-head{margin-bottom:5px}#buttons-layout .dpad-center{margin:4px}}
 @media(max-height:400px){.brand-icon{width:32px;height:32px}.brand h1{font-size:17px}.topbar{min-height:34px}.top-actions button{min-height:34px}.brand p{font-size:8px}.card-head,#test-panel .card-head{min-height:18px;margin-bottom:4px}.section-title{font-size:11px}.motion{font-size:8px}.handbrake{height:56px}.handbrake svg{width:34px;height:34px}.handbrake>span{display:none}.speed-label label{font-size:8px}.value{font-size:20px}.throttle-scale{top:50px}.flash-message{max-height:15px;font-size:9px}#test-panel .selection-hint{display:none}#test-panel .motor-check small{font-size:8px}.dialog-head{padding:12px 16px}.dialog-head h2{font-size:20px}.dialog-foot{padding:8px 16px}.settings-body{padding:0 16px}}
 @media(max-width:400px){.topbar{gap:4px}.brand p{font-size:8px}.brand-icon{width:33px;height:33px}.brand h1{font-size:18px}.top-actions{gap:4px}.top-actions button{padding:5px 9px}.mode-readout{font-size:7px}.section-title{font-size:12px}.card-head{flex-wrap:wrap;gap:3px}.motion{font-size:8px}.settings-body{padding:0 15px}.dialog-head{padding:15px}.dialog-foot{padding:10px 15px}#radar-panel .radar-title{font-size:6px}#radar-panel #radar-status{font-size:6px}#radar-panel .radar-empty span{display:none}#gear-picker button{font-size:9px}#gear-picker b{font-size:15px}#spin-controls .hold-button{font-size:9px;gap:3px}}
+/* Własny układ korzysta z tych samych aktywnych kontrolek co presety. */
+body[data-freeform="true"] #workdeck{display:block;position:relative;isolation:isolate;overflow:hidden;border:1px solid #2d443a;border-radius:14px;background:#101d18}
+body[data-freeform="true"] :is(#drive-panel,#drive-stage,#buttons-layout,#wheel-layout,#steering-area,#pedal-area,#instrument-rail,.dpad,.pedals,#spin-controls):not([hidden]){display:contents;container-type:normal}
+body[data-freeform="true"] :is(#drive-panel>.card-head,.steering-label,.dpad-center){display:none}
+body[data-freeform="true"] [data-free-block]{position:absolute!important;left:var(--free-x);top:var(--free-y);width:var(--free-w)!important;height:var(--free-h)!important;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;grid-area:auto!important;align-self:auto;justify-self:auto;z-index:1;box-sizing:border-box;touch-action:none}
+body[data-freeform="true"] #steering-wheel{aspect-ratio:auto;display:flex;align-items:center;justify-content:center;container-type:size}
+body[data-freeform="true"] #wheel-art{width:min(100cqw,100cqh);height:min(100cqw,100cqh);max-width:100%;max-height:100%}
+body[data-freeform="true"] #gear-picker{display:grid!important;padding:3px;grid-template-columns:1fr 1fr;border-radius:12px}
+body[data-freeform="true"] #gear-picker button{min-height:0;font-size:11px}
+body[data-freeform="true"] #spin-controls .hold-button{font-size:11px;flex-direction:column;gap:3px;padding:4px}
+body[data-freeform="true"] .hold-button{overflow:hidden;padding:4px;font-size:clamp(10px,1.6vw,17px)!important}
+body[data-freeform="true"] .hold-button svg{max-height:50%;max-width:65%;flex-shrink:1}
+body[data-freeform="true"] #drive-speed-area{display:flex;padding:8px;background:#17251e;border:1px solid #3a5142;border-radius:12px;gap:5px;overflow:hidden}
+body[data-freeform="true"] #drive-speed-area .throttle-scale{display:none}
+body[data-freeform="true"] #drive-speed-area input{min-width:0;min-height:0;flex:1}
+body[data-freeform="true"][data-pwm="bottom"] #drive-speed-area{flex-direction:row;align-items:center}
+body[data-freeform="true"][data-pwm="right"] #drive-speed-area{flex-direction:column;align-items:center}
+body[data-freeform="true"] [data-free-block="stop"]{display:flex!important;flex-direction:column;align-items:stretch;justify-content:center;padding:3px!important;border:1px solid #80534a!important;background:#281f1d;border-radius:12px;z-index:10;overflow:hidden}
+body[data-freeform="true"] .handbrake{flex:1;min-height:0!important;height:auto!important;flex-direction:row!important;gap:3px!important;padding:2px}
+body[data-freeform="true"] .handbrake svg{width:36px;height:36px;max-height:100%;max-width:45%}
+body[data-freeform="true"] .handbrake>span{display:none}
+body[data-freeform="true"] #lock-panel{flex:none}
+body[data-freeform="true"] .unlock{width:100%;min-height:32px!important;height:32px;padding:2px!important;margin:2px 0 0!important}
+.visual-open{width:100%;margin-top:12px;min-height:46px;font-size:13px}
+.visual-editor{width:100vw;height:100dvh;max-width:100vw;max-height:100dvh;margin:0;padding:0;border:0;border-radius:0;background:#0d1713;overflow:hidden;overscroll-behavior:none}
+.visual-editor[open]{display:flex;flex-direction:column}
+.visual-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:none;padding:max(10px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 10px max(12px,env(safe-area-inset-left));border-bottom:1px solid #2d4537;background:#15261c}
+.visual-head small{color:#93bd9c;font-size:9px;letter-spacing:1.3px}.visual-head h2{font-size:19px;letter-spacing:-.3px}.visual-head button{min-height:38px;font-size:12px;padding:6px 12px}
+.visual-head-actions{display:flex;gap:5px;flex:none}#visual-tools-toggle{width:36px;padding:3px;font-size:20px}.visual-editor[data-expanded="true"] .visual-tools{display:none}.visual-editor[data-expanded="true"] .visual-body{grid-template-columns:1fr}
+.visual-body{display:grid;grid-template-columns:190px minmax(0,1fr);flex:1;min-height:0;overflow:hidden}
+.visual-tools{display:flex;flex-direction:column;gap:14px;padding:12px;border-right:1px solid #2d4537;overflow:auto;overscroll-behavior:contain}
+.visual-variants{display:grid;gap:9px}.visual-tools label,.visual-footer label{font-size:10px;color:#a7bfae;display:block}
+.visual-tools select,.visual-footer input{width:100%;max-width:100%;border:1px solid #3a5b44;background:#172a1d;border-radius:8px;color:#e2efe5;padding:6px 8px;min-height:36px;font-size:12px;margin-top:4px}
+.visual-inspector{padding-top:10px;border-top:1px solid #2d4537;display:flex;flex-direction:column;gap:5px;min-width:0}
+.visual-inspector strong{font-size:12px;color:#d9efdf}.visual-inspector output{font:10px ui-monospace,monospace;color:#a9bfad}.visual-inspector button{font-size:11px;padding:6px;margin-top:3px;min-height:36px}
+.visual-history{display:grid;grid-template-columns:1fr 1fr;gap:5px}.visual-history .text-button{grid-column:1/-1;padding:3px;font-size:10px}.visual-history .outline{padding:6px 3px;min-height:34px;font-size:11px}
+.visual-snap{display:flex!important;align-items:center;gap:6px;font-size:10px!important;cursor:pointer}.visual-snap input{accent-color:#9ce8b6;width:17px;height:17px;margin:0}
+.visual-view{display:flex;flex-direction:column;min-height:0;min-width:0;padding:10px 10px 6px;overflow:hidden}
+.visual-canvas-caption{display:flex;justify-content:space-between;gap:5px;flex:none;padding:0 5px 5px;font-size:11px;color:#c6ddcd}.visual-canvas-caption>span:last-child{font:8px ui-monospace,monospace;letter-spacing:.5px;color:#90b39b;align-self:center}
+#visual-stage{display:flex;align-items:center;justify-content:center;flex:1;min-height:0;min-width:0;overflow:hidden;background:#080f0c;border-radius:12px;border:1px solid #233e2d}
+#visual-board{position:relative;flex:none;border:1px solid #719e7e;background-color:#102218;background-image:linear-gradient(#c5ffd50b 1px,transparent 1px),linear-gradient(90deg,#c5ffd50b 1px,transparent 1px);background-size:10% 10%;box-shadow:0 8px 50px #0006;touch-action:none;user-select:none;-webkit-user-select:none;isolation:isolate}
+.layout-tile{position:absolute;border:1px solid #547b5d;border-radius:7px;background:linear-gradient(135deg,#284433,#1a2a20);color:#d8f0df;cursor:grab;touch-action:none;outline:none;z-index:1}
+.layout-tile:active{cursor:grabbing}.layout-tile.selected{outline:2px solid #a2f5b8;outline-offset:1px;z-index:20;background:linear-gradient(135deg,#3c6348,#243e2d);box-shadow:0 0 14px #a1f6b025}
+.layout-tile.overlap{border-color:#e9b474}.layout-tile[data-block="stop"]{background:#3e2823;border-color:#bb7b68;color:#ffc3ac}.layout-tile[data-block="radar"]{background:#0f2b1c}
+.tile-content{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px;overflow:hidden;pointer-events:none}
+.tile-icon{font-size:clamp(13px,2.6vw,30px);line-height:1;display:block;flex:none}.tile-label{font-size:clamp(7px,1.1vw,11px);line-height:1.2;max-width:100%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}.tile-stop{font:bold 11px ui-monospace,monospace}.tile-gear{font:bold 14px ui-monospace,monospace}
+.tile-wheel{width:68%;max-width:150px;aspect-ratio:1;min-height:0;flex:0 1 auto;border:7px solid #6e9280;border-radius:50%;position:relative;box-shadow:inset 0 0 0 2px #12251b;background:radial-gradient(circle,#81b795 0 10%,transparent 11%)}
+.tile-wheel:after{content:"";position:absolute;width:70%;height:4px;left:15%;top:48%;background:#6e9280}.tile-radar{width:65%;max-width:145px;aspect-ratio:1;flex:0 1 auto;border-radius:50%;border:1px solid #619b6b;background:repeating-radial-gradient(circle,transparent 0 17%,#5e9d6955 18% 19%,transparent 20%),conic-gradient(from 10deg,#9deb8e60,transparent 65deg);position:relative}
+.tile-radar:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 49%,#619b6b 50%,transparent 51%),linear-gradient(90deg,transparent 49%,#619b6b 50%,transparent 51%)}
+.layout-tile[data-block="pwm"] .tile-content{flex-direction:column}.tile-pwm{width:7px;flex:1;min-height:12px;max-height:80%;border-radius:5px;background:linear-gradient(to top,#a9df9c 45%,#0a150e 45%);position:relative;border:1px solid #61946b}
+.tile-pwm:after{content:"";position:absolute;top:48%;left:-6px;width:17px;height:9px;border-radius:3px;background:#b7d7ab;border:1px solid #e1eed2}
+#visual-board[data-axis="horizontal"] .layout-tile[data-block="pwm"] .tile-content{flex-direction:row;gap:9px}
+#visual-board[data-axis="horizontal"] .tile-pwm{width:auto;height:7px;min-height:0;max-width:80%;background:linear-gradient(to right,#a9df9c 45%,#0a150e 45%)}
+#visual-board[data-axis="horizontal"] .tile-pwm:after{left:48%;top:-6px;width:9px;height:17px}
+.resize-handle{position:absolute;width:26px;height:26px;display:none;z-index:2;touch-action:none}
+.resize-handle:after{content:"";position:absolute;inset:8px;border:1px solid #e4ffea;border-radius:2px;background:#87dca0;box-shadow:0 1px 4px #000}
+.selected .resize-handle{display:block}.handle-nw{top:-12px;left:-12px;cursor:nwse-resize}.handle-ne{top:-12px;right:-12px;cursor:nesw-resize}.handle-sw{bottom:-12px;left:-12px;cursor:nesw-resize}.handle-se{bottom:-12px;right:-12px;cursor:nwse-resize}
+.resize-handle:focus-visible{outline:2px solid white;border-radius:5px}
+#visual-feedback{flex:none;min-height:28px;margin:6px 4px 0;font-size:10px;color:#9bb7a1;line-height:1.4}
+.visual-footer{flex:none;display:flex;align-items:end;gap:10px;padding:8px max(12px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));background:#15261c;border-top:1px solid #2d4537}
+.visual-footer label{flex:1;min-width:0}.visual-footer input{margin-top:2px}.visual-footer button{font-size:12px;min-height:38px;padding:7px 15px;white-space:nowrap}
+@media(orientation:portrait){.visual-body{display:flex;flex-direction:column}.visual-tools{flex:none;display:grid;grid-template-columns:1fr 1fr;gap:7px 10px;padding:8px 12px;border-right:0;border-bottom:1px solid #2d4537;overflow:visible}.visual-variants{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}.visual-variants label{font-size:9px}.visual-tools select{font-size:11px;padding:5px;min-height:32px}.visual-inspector{padding:0;border:0;gap:2px}.visual-inspector strong{font-size:11px}.visual-inspector output{font-size:9px}.visual-inspector button{padding:3px;min-height:29px;margin-top:2px}.visual-history{gap:4px}.visual-history .outline{min-height:30px;padding:4px 2px;font-size:10px}.visual-history .text-button{min-height:26px;font-size:9px}.visual-snap{grid-column:1/-1;min-height:18px}.visual-view{flex:1;padding:6px}.visual-head h2{font-size:16px}.visual-head small{font-size:8px}.visual-head{padding-top:max(8px,env(safe-area-inset-top));padding-bottom:8px}.visual-canvas-caption{font-size:10px}.visual-footer{gap:7px}.visual-footer button{font-size:11px;padding:6px 10px}.visual-footer label{font-size:9px}.visual-footer input{font-size:11px;min-height:34px}#visual-feedback{font-size:9px;min-height:24px;margin-top:4px}}
+@media(orientation:landscape) and (max-height:500px){.visual-head{padding-top:max(4px,env(safe-area-inset-top));padding-bottom:4px}.visual-head h2{font-size:15px}.visual-head small{display:none}.visual-head button{min-height:30px;font-size:10px}.visual-body{grid-template-columns:165px minmax(0,1fr)}.visual-tools{padding:7px;gap:7px}.visual-variants{gap:4px}.visual-variants label{display:flex;align-items:center;justify-content:space-between;gap:5px;font-size:9px}.visual-variants select{width:101px;margin:0;min-height:28px;font-size:10px;padding:3px}.visual-inspector{border:0;padding:0;gap:2px;display:grid;grid-template-columns:1fr auto;align-items:center}.visual-inspector strong{font-size:10px}.visual-inspector output{font-size:8px}.visual-inspector button{grid-column:1/-1;min-height:27px;padding:3px;font-size:10px}.visual-history .outline{min-height:27px;font-size:10px;padding:3px}.visual-history .text-button{min-height:24px;font-size:9px}.visual-snap{font-size:9px!important}.visual-view{padding:6px}.visual-canvas-caption{font-size:10px}.visual-footer{padding-top:4px;padding-bottom:max(4px,env(safe-area-inset-bottom));align-items:center}.visual-footer label{display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:9px}.visual-footer input{margin:0;min-height:29px;font-size:11px}.visual-footer button{min-height:31px;font-size:11px;padding:4px 12px}#visual-feedback{font-size:9px;min-height:24px;margin-top:3px}}
+
 </style></head><body>
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
 <symbol id="i-rover" viewbox="0 0 24 24"><rect height="16" rx="3" width="10" x="7" y="4"></rect><path d="M9.5 8h5M9.5 16h5M4 6v3m16-3v3M4 15v3m16-3v3M4 7.5h3m10 0h3M4 16.5h3m10 0h3"></path></symbol>
@@ -185,35 +249,43 @@ body[data-pwm="top"] .unlock,body[data-pwm="bottom"] .unlock{min-height:24px;pad
 <p>Na komputerze użyj ikony instalacji w pasku adresu albo opcji instalacji w menu przeglądarki.</p>
 <p class="hint">Otwórz stronę z GitHub Pages przez HTTPS. Instalacja nie zmienia obsługi Bluetooth — używaj przeglądarki, w której połączenie z autkiem już działa.</p>
 </dialog>
+<dialog id="visual-editor" class="visual-editor" aria-labelledby="visual-title">
+ <header class="visual-head"><div><small>ROVER / WŁASNY UKŁAD</small><h2 id="visual-title">Ułóż ekran po swojemu</h2></div><div class="visual-head-actions"><button id="visual-tools-toggle" class="outline" type="button" aria-label="Powiększ podgląd — schowaj opcje" aria-pressed="false">⛶</button><button id="visual-cancel" class="outline" type="button">Anuluj</button></div></header>
+ <div class="visual-body">
+  <aside class="visual-tools">
+   <div class="visual-variants">
+    <label>Ekran<select id="visual-orientation"><option value="landscape">Poziomy</option><option value="portrait">Pionowy</option></select></label>
+    <label>Widok<select id="visual-radar"><option value="plain">Bez radaru</option><option value="radar">Z radarem</option></select></label>
+    <label>Sterowanie<select id="visual-method"><option value="buttons">Przyciski</option><option value="wheel">Kierownica</option></select></label>
+   </div>
+   <div class="visual-inspector"><strong id="visual-selected">Wybierz blok</strong><output id="visual-size"></output><button id="visual-rotate" class="outline" type="button" disabled>Obróć PWM ↻</button></div>
+   <div class="visual-history"><button id="visual-undo" class="outline" type="button" disabled aria-label="Cofnij zmianę układu">↶ Cofnij</button><button id="visual-redo" class="outline" type="button" disabled aria-label="Ponów zmianę układu">↷ Ponów</button><button id="visual-reset" class="text-button" type="button">Przywróć ten wariant</button></div>
+   <label class="visual-snap"><input type="checkbox" id="visual-snap" checked/> Przyciągaj do siatki</label>
+  </aside>
+  <section class="visual-view" aria-label="Wizualny edytor rozmieszczenia">
+   <div class="visual-canvas-caption"><span id="visual-variant-title"></span><span>EDYCJA · AUTO STOI</span></div>
+   <div id="visual-stage"><div id="visual-board" aria-label="Przeciągnij bloki; uchwyty w rogach zmieniają rozmiar"></div></div>
+   <p id="visual-feedback" role="status" aria-live="polite">Przesuń blok palcem. Rozmiar zmień uchwytami w rogach.</p>
+  </section>
+ </div>
+ <footer class="visual-footer"><label for="visual-name">Nazwa profilu<input id="visual-name" maxlength="32" autocomplete="off" type="text" placeholder="Mój układ"/></label><button id="visual-apply" class="primary" type="button">Zapisz i użyj</button></footer>
+</dialog>
+
 <noscript>Włącz JavaScript, aby korzystać z panelu.</noscript>
 <dialog aria-labelledby="settings-title" class="settings-dialog" id="settings-dialog">
 <div class="dialog-head"><div><p class="eyebrow">ROVER / PANEL STEROWANIA</p><h2 id="settings-title">Ustawienia</h2></div><button aria-label="Zamknij ustawienia" class="icon-button" id="settings-close" type="button">✕</button></div>
 <div class="settings-body">
 <section class="settings-section"><h3>Tryb pracy</h3><nav aria-label="Tryb sterowania" class="mode-tabs"><button aria-pressed="true" id="mode-drive" type="button"><svg aria-hidden="true"><use href="#i-rover"></use></svg>Jazda</button><button aria-pressed="false" id="mode-test" type="button"><svg aria-hidden="true"><use href="#i-test"></use></svg>Test silników</button></nav></section>
 <section class="settings-section" id="drive-settings"><h3>Sterowanie</h3><div aria-label="Metoda sterowania" class="method-picker"><button aria-pressed="true" id="method-buttons" type="button">Przyciski</button><button aria-pressed="false" id="method-wheel" type="button">Kierownica</button></div><label class="setting-toggle"><input id="latch-buttons" type="checkbox"/><span>Podtrzymuj przód / tył<small>Dotknij, aby włączyć jazdę. Dotknij ponownie, aby zwolnić.</small></span></label><label class="setting-toggle"><input id="latch-steering" type="checkbox"/><span>Podtrzymuj lewo / prawo<small>Domyślnie wyłączone: skręt kończy się po puszczeniu przycisku.</small></span></label><p class="setting-hint">Działa dla przycisków kierunku. Przód i tył można łączyć ze skrętem.</p></section><section class="settings-section" id="layout-settings">
-<h3>Układ ekranu <span class="future-badge">PROFILE</span></h3>
-<label class="profile-select-label" for="layout-profile">Gotowy lub własny profil</label>
-<select class="wide-select" id="layout-profile"></select>
-<div aria-label="Edytowana orientacja" class="orientation-picker"><button aria-pressed="true" id="edit-landscape" type="button">Poziom</button><button aria-pressed="false" id="edit-portrait" type="button">Pion</button></div>
-<p class="setting-hint" id="layout-edit-hint"></p>
-<div aria-label="Podgląd rozmieszczenia elementów" class="layout-preview" id="layout-preview" role="img"><div id="preview-board"><div id="preview-stage"><span id="preview-controls">Przyciski</span><span id="preview-wheel">Kierownica</span><span id="preview-pedals">Pedały</span><span id="preview-radar">Radar</span></div><span id="preview-pwm">PWM / STOP</span></div></div>
-<div class="layout-fields">
-<label>Przyciski kierunku<select id="layout-buttons"><option value="split">Dwa kciuki</option><option value="cross">Krzyż</option></select></label>
-<label>Strony sterowania<select id="layout-order"><option value="normal">Skręt po lewej</option><option value="mirrored">Skręt po prawej</option></select></label>
-<label>Suwak PWM<select id="layout-pwm"><option value="right">Pionowo · prawa</option><option value="left">Pionowo · lewa</option><option value="bottom">Poziomo · dół</option><option value="top">Poziomo · góra</option></select></label>
-<label>Rozmiar panelu PWM<select id="layout-rail"><option value="compact">Mały</option><option value="normal">Średni</option><option value="large">Duży</option></select></label>
-<label>Pozycja radaru<select id="layout-radar"><option value="center">Automatycznie</option><option value="left">Po lewej</option><option value="right">Po prawej</option><option value="top">U góry</option><option value="bottom">Na dole</option></select></label>
-<label>Odstępy<select id="layout-gap"><option value="compact">Małe</option><option value="comfortable">Większe</option></select></label>
-</div>
-<label class="setting-toggle"><input id="layout-radar-visible" type="checkbox"/><span>Radar w tym układzie</span></label>
-<label class="layout-range" for="layout-radar-size"><span>Udział radaru <output id="layout-radar-size-value"></output></span><input id="layout-radar-size" max="50" min="25" step="5" type="range"/></label>
-<label class="layout-range" for="layout-wheel-size"><span>Miejsce na kierownicę <output id="layout-wheel-size-value"></output></span><input id="layout-wheel-size" max="65" min="35" step="5" type="range"/></label>
-<label class="layout-range" for="layout-control-size"><span>Wielkość sterowania <output id="layout-control-size-value"></output></span><input id="layout-control-size" max="100" min="75" step="5" type="range"/></label>
-<p class="setting-hint">100% wykorzystuje całe pole sterowania. Przy małej wysokości ekranu proporcje dopasują się tak, aby zachować miejsce na przyciski. Profil zawiera pion i poziom. Po zmianie układu auto stoi.</p>
-<label class="profile-select-label" for="profile-name">Nazwa własnego profilu</label><input autocomplete="off" class="profile-name" id="profile-name" maxlength="32" placeholder="Np. Telefon · radar" type="text"/>
-<div class="profile-actions"><button class="primary" id="profile-new" type="button">Zapisz jako nowy</button><button class="outline" id="profile-save" type="button">Zapisz zmiany</button><button class="outline" id="profile-reset" type="button">Przywróć profil</button><button class="text-button" id="profile-delete" type="button">Usuń własny profil</button></div>
-<p aria-live="polite" class="setting-hint" id="profile-status" role="status"></p>
+ <h3>Układ ekranu <span class="future-badge">PROFILE</span></h3>
+ <label class="profile-select-label" for="layout-profile">Gotowy lub własny profil</label><select class="wide-select" id="layout-profile"></select>
+ <button class="primary visual-open" id="visual-open" type="button">✥ Przesuwaj i zmieniaj rozmiary</button>
+ <p class="setting-hint">Wybierz preset lub ułóż własny ekran palcem. Osobno zapisujesz pion i poziom, każdy z radarem i bez. Przyciski i kierownica mają osobne rozmieszczenie.</p>
+ <label class="profile-select-label" for="profile-name">Nazwa własnego profilu</label><input autocomplete="off" class="profile-name" id="profile-name" maxlength="32" placeholder="Np. Telefon · dwa kciuki" type="text"/>
+ <div class="profile-actions"><button class="outline" id="profile-new" type="button">Zapisz kopię</button><button class="outline" id="profile-save" type="button">Zapisz zmiany</button><button class="outline" id="profile-reset" type="button">Przywróć profil</button><button class="text-button" id="profile-delete" type="button">Usuń własny profil</button></div>
+ <p aria-live="polite" class="setting-hint" id="profile-status" role="status"></p>
 </section>
+
 
 <section class="settings-section"><h3>Radar</h3><label class="setting-toggle"><input id="radar-enabled" type="checkbox"/><span>Radar obok sterowania<small>Zmienia układ ekranu jazdy.</small></span></label><div class="setting-row"><label for="radar-step">Odstęp pierścieni</label><select id="radar-step"><option value="5">5 cm</option><option value="10">10 cm</option><option value="25">25 cm</option><option value="50">50 cm</option></select></div><label class="setting-toggle"><input id="radar-demo" type="checkbox"/><span>Podgląd demonstracyjny<small>Punkty przykładowe, bez odczytów z czujników.</small></span></label></section>
 <section class="settings-section"><h3>Autopilot <span class="future-badge">PO DODANIU CZUJNIKÓW</span></h3><label class="setting-toggle"><input id="autopilot-lock" type="checkbox"/><span>Blokuj sterowanie ręczne podczas autopilota<small>Wyłączone: ruch ręcznym sterowaniem wyłączy autopilota i pozwoli przejąć jazdę. Włączone: najpierw trzeba wyłączyć autopilota.</small></span></label><p class="setting-hint">STOP awaryjny pozostanie dostępny zawsze. To ustawienie jest przygotowane do przyszłych trybów autonomicznych.</p></section><section class="settings-section"><h3>Połączenie</h3><label class="setting-toggle"><input checked="" id="auto-connect" type="checkbox"/><span>Łącz z ostatnim urządzeniem</span></label><p class="setting-hint" id="remembered-device"></p><details class="connection-guide" id="pairing-guide">
@@ -421,9 +493,114 @@ class RoverSerial {
   method:stored.method==='wheel'?'wheel':'buttons',radar:stored.radar===true,radarStep:[5,10,25,50].includes(stored.radarStep)?stored.radarStep:5,
   last:stored.last&&stored.last.kind==='bluetooth'&&typeof stored.last.signature==='string'?stored.last:null};
  // Przechowuje profile i osobne układy dla obu orientacji ekranu.
- const LAYOUT_KEY='rover-layouts-v1';
+ // Pozycje bloków zapisuje jako ułamki szerokości i wysokości pola jazdy.
+ const FREE_KEYS=['F','B','L','R','SL','SR','wheel','gas','brake','gear','pwm','stop','radar'];
+ const FREE_NAMES={F:'Przód',B:'Tył',L:'Lewo',R:'Prawo',SL:'Obrót w lewo',SR:'Obrót w prawo',wheel:'Kierownica',gas:'Gaz',brake:'Hamulec',gear:'Bieg D / R',pwm:'Suwak PWM',stop:'STOP / zwolnienie',radar:'Radar'};
+ const variantKey=(method,radar)=>method+(radar?'-radar':'-plain');
+ const visibleBlocks=(method,radar)=>[...(method==='wheel'?['wheel','gear','brake','gas']:['F','B','L','R']),'SL','SR','pwm','stop',...(radar?['radar']:[])];
+ const bound=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+ function minimumBlock(key,board){
+  const size=key==='wheel'||key==='radar'?[84,84]:key==='gear'?[96,44]:key==='stop'?[64,76]:key==='pwm'?[48,48]:[44,44];
+  return {w:Math.min(1,size[0]/board.w),h:Math.min(1,size[1]/board.h)};
+ }
+ function fitRect(rect,key,board){
+  const min=minimumBlock(key,board),w=bound(rect.w,min.w,1),h=bound(rect.h,min.h,1);
+  return {x:bound(rect.x,0,1-w),y:bound(rect.y,0,1-h),w,h};
+ }
+ function cleanFreeform(raw){
+  const result={};if(!raw||typeof raw!=='object')return result;
+  for(const method of ['buttons','wheel'])for(const radar of [false,true]){
+   const key=variantKey(method,radar),p=raw[key];if(!p||!p.rects)continue;
+   const board={w:bound(Number(p.board?.w)||800,240,2400),h:bound(Number(p.board?.h)||400,180,2400)};
+   const rects={};let valid=true;
+   for(const name of visibleBlocks(method,radar)){
+    const r=p.rects[name];if(!r||!['x','y','w','h'].every(k=>Number.isFinite(r[k]))){valid=false;break;}
+    rects[name]=fitRect(r,name,board);
+   }
+   if(valid)result[key]={board,pwmAxis:p.pwmAxis==='horizontal'?'horizontal':'vertical',rects};
+  }
+  return result;
+ }
+ function alterRect(rect,dx,dy,handle,key,board){
+  if(!handle)return fitRect({...rect,x:rect.x+dx,y:rect.y+dy},key,board);
+  const min=minimumBlock(key,board);let left=rect.x,top=rect.y,right=left+rect.w,bottom=top+rect.h;
+  if(handle.includes('w'))left=bound(left+dx,0,right-min.w);
+  if(handle.includes('e'))right=bound(right+dx,left+min.w,1);
+  if(handle.includes('n'))top=bound(top+dy,0,bottom-min.h);
+  if(handle.includes('s'))bottom=bound(bottom+dy,top+min.h,1);
+  return {x:left,y:top,w:right-left,h:bottom-top};
+ }
+ function overlappingBlocks(plan){
+  const keys=Object.keys(plan.rects),pairs=[];
+  for(let i=0;i<keys.length;i++)for(let j=i+1;j<keys.length;j++){
+   const a=plan.rects[keys[i]],b=plan.rects[keys[j]];
+   if(Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x)>.002&&Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y)>.002)pairs.push([keys[i],keys[j]]);
+  }
+  return pairs;
+ }
+ // Tworzy punkt wyjścia edytora na podstawie wybranego presetu.
+ function seedFreeform(config,method,orientation,radar,board){
+  const W=board.w,H=board.h,g=6,rects={},horizontal=['top','bottom'].includes(config.pwmPosition);
+  const put=(key,x,y,w,h)=>rects[key]=fitRect({x:x/W,y:y/H,w:w/W,h:h/H},key,board);
+  let main={x:0,y:0,w:W,h:H};
+  if(horizontal){
+   const rh=76,y=config.pwmPosition==='top'?0:H-rh;
+   put('pwm',0,y,W-92-g,rh);put('stop',W-92,y,92,rh);
+   main.h-=rh+g;if(y===0)main.y=rh+g;
+  }else{
+   const rw=76,x=config.pwmPosition==='left'?0:W-rw;
+   put('pwm',x,0,rw,H-88-g);put('stop',x,H-88,rw,88);
+   main.w-=rw+g;if(x===0)main.x=rw+g;
+  }
+  let region={...main};
+  if(radar){
+   let pos=config.radarPosition;
+   if(pos==='center')pos=orientation==='landscape'?'right':'top';
+   if(orientation==='portrait')pos='top';
+   if(orientation==='landscape'&&['top','bottom'].includes(pos))pos='right';
+   const fraction=bound(config.radarShare/100,.25,.4);
+   if(['left','right'].includes(pos)){
+    const w=main.w*fraction;put('radar',pos==='left'?main.x:main.x+main.w-w,main.y,w,main.h);
+    region.w-=w+g;if(pos==='left')region.x+=w+g;
+   }else{
+    const h=main.h*fraction;put('radar',main.x,main.y,main.w,h);region.y+=h+g;region.h-=h+g;
+   }
+  }
+  const {x,y,w,h}=region;
+  if(method==='buttons'){
+   const spinH=44,controlsH=h-spinH-g;
+   if(config.buttonLayout==='cross'){
+    const cw=(w-2*g)/3,ch=(controlsH-2*g)/3;
+    put('F',x+cw+g,y,cw,ch);put('B',x+cw+g,y+2*(ch+g),cw,ch);
+    put('L',x,y+ch+g,cw,ch);put('R',x+2*(cw+g),y+ch+g,cw,ch);
+   }else{
+    const half=(w-g)/2,side=(half-g)/2,ch=(controlsH-g)/2;
+    const turnX=config.controlOrder==='mirrored'?x+half+g:x,driveX=config.controlOrder==='mirrored'?x:x+half+g;
+    put('L',turnX,y,side,controlsH);put('R',turnX+side+g,y,side,controlsH);
+    put('F',driveX,y,half,ch);put('B',driveX,y+ch+g,half,ch);
+   }
+   put('SL',x,y+h-spinH,(w-g)/2,spinH);put('SR',x+(w+g)/2,y+h-spinH,(w-g)/2,spinH);
+  }else{
+   let turn,pedals;
+   if(orientation==='landscape'){
+    const pw=Math.max(160,(w-g)*(1-config.wheelShare/100)),tw=w-pw-g;
+    turn={x:config.controlOrder==='mirrored'?x+pw+g:x,y,w:tw,h};
+    pedals={x:config.controlOrder==='mirrored'?x:x+tw+g,y,w:pw,h};
+   }else{
+    const ph=Math.max(156,(h-g)*(1-config.wheelShare/100));
+    turn={x,y,w,h:h-ph-g};pedals={x,y:y+h-ph,w,h:ph};
+   }
+   put('wheel',turn.x,turn.y,turn.w,turn.h);
+   const px=pedals.x,py=pedals.y,pw=pedals.w,ph=pedals.h,ch=(pw-g)/2;
+   put('gear',px,py,pw,44);put('brake',px,py+44+g,ch,ph-88-2*g);put('gas',px+ch+g,py+44+g,ch,ph-88-2*g);
+   put('SL',px,py+ph-44,ch,44);put('SR',px+ch+g,py+ph-44,ch,44);
+  }
+  return {board:{...board},pwmAxis:horizontal?'horizontal':'vertical',rects};
+ }
+
+ const LAYOUT_KEY='rover-layouts-v2';
  const copy=value=>JSON.parse(JSON.stringify(value));
- const baseLayout={radar:false,radarPosition:'center',radarShare:30,controlOrder:'normal',buttonLayout:'split',controlSize:100,wheelShare:55,pwmPosition:'right',pwmSize:'normal',gap:'compact'};
+ const baseLayout={freeform:{},radar:false,radarPosition:'center',radarShare:30,controlOrder:'normal',buttonLayout:'split',controlSize:100,wheelShare:55,pwmPosition:'right',pwmSize:'normal',gap:'compact'};
  const pair=(landscape={},portrait={})=>({landscape:{...baseLayout,...landscape},portrait:{...baseLayout,buttonLayout:'cross',radarPosition:'top',...portrait}});
  const presets=[
   {id:'balanced',name:'Klasyczny',layouts:pair({buttonLayout:'cross'},{})},
@@ -436,11 +613,11 @@ class RoverSerial {
   const enums={radarPosition:['center','left','right','top','bottom'],controlOrder:['normal','mirrored'],buttonLayout:['cross','split'],pwmPosition:['left','right','top','bottom'],pwmSize:['compact','normal','large'],gap:['compact','comfortable']};
   for(const [key,values]of Object.entries(enums))if(values.includes(raw[key]))result[key]=raw[key];
   for(const [key,min,max]of [['radarShare',25,50],['wheelShare',35,65],['controlSize',75,100]])if(Number.isFinite(raw[key]))result[key]=Math.max(min,Math.min(max,Math.round(raw[key]/5)*5));
-  if(typeof raw.radar==='boolean')result.radar=raw.radar;return result;
+  if(typeof raw.radar==='boolean')result.radar=raw.radar;result.freeform=cleanFreeform(raw.freeform);return result;
  }
  const cleanPair=raw=>({landscape:cleanLayout(raw?.landscape,presets[0].layouts.landscape),portrait:cleanLayout(raw?.portrait,presets[0].layouts.portrait)});
  const cleanName=value=>typeof value==='string'?value.replace(/[\u0000-\u001f\u007f]/g,'').trim().slice(0,32):'';
- let savedLayouts={};try{savedLayouts=JSON.parse(localStorage.getItem(LAYOUT_KEY)||'{}')||{};}catch(_){}
+ let savedLayouts={};try{savedLayouts=JSON.parse(localStorage.getItem(LAYOUT_KEY)||localStorage.getItem('rover-layouts-v1')||'{}')||{};}catch(_){}
  const customProfiles=[],seenIds=new Set();
  for(const profile of (Array.isArray(savedLayouts.custom)?savedLayouts.custom:[]).slice(0,12)){
   if(!profile||typeof profile.id!=='string'||!/^custom-[a-z0-9-]+$/.test(profile.id)||seenIds.has(profile.id)||!cleanName(profile.name))continue;
@@ -500,6 +677,10 @@ class RoverSerial {
   return{areas:horizontal?names.map(n=>'"'+n+'"').join(' '):'"'+names.join(' ')+'"',cols:horizontal?'minmax(0,1fr)':sizes,rows:horizontal?sizes:'minmax(0,1fr)'};
  }
  function applyLayout(){
+  const raw=activeLayout();preferences.radar=raw.radar;
+  const free=state.mode==='drive'?raw.freeform?.[variantKey(state.method,raw.radar)]:null;
+  document.body.dataset.freeform=String(!!free);
+  if(free){applyFreeLayout(free);return;}freeSignature='';
   const config=fittedLayout(activeLayout());preferences.radar=config.radar;
   document.body.dataset.pwm=config.pwmPosition;document.body.dataset.buttons=config.buttonLayout;document.body.dataset.order=config.controlOrder;
   document.body.dataset.shortControls=String(state.method==='wheel'&&layoutOrientation()==='landscape'&&((config.radar&&['top','bottom'].includes(config.radarPosition))||(['top','bottom'].includes(config.pwmPosition)&&window.innerHeight<440)));
@@ -509,52 +690,172 @@ class RoverSerial {
   for(const [id,area]of [['steering-area','wheel'],['pedal-area','pedals'],['radar-panel','radar'],['buttons-layout','controls']])$(id).style.gridArea=area;
   for(const mode of ['drive','test'])$(mode+'-speed').setAttribute('aria-orientation',['left','right'].includes(config.pwmPosition)?'vertical':'horizontal');
  }
- function drawLayoutPreview(){
-  const config=fittedLayout(layoutStore.working[editOrientation],editOrientation);
-  $('layout-preview').dataset.orientation=editOrientation;
-  placeGrid($('preview-board'),railGrid(config,true));placeGrid($('preview-stage'),layoutGrid(config,state.method,editOrientation,true));
-  $('preview-controls').hidden=state.method!=='buttons';$('preview-wheel').hidden=state.method!=='wheel';$('preview-pedals').hidden=state.method!=='wheel';$('preview-radar').hidden=!config.radar;
-  setText('preview-controls',config.buttonLayout==='split'?'Dwa kciuki':'Krzyż');
- }
+ const freeElements={};
+ let visual=null,visualGesture=null,visualObserver=null,freeSignature='';
+ const newProfileId=()=>'custom-'+(crypto.randomUUID?.()||Date.now().toString(36)+'-'+Math.random().toString(36).slice(2));
  function renderProfileOptions(){
   const select=$('layout-profile');select.replaceChildren();
   for(const p of allProfiles()){const option=document.createElement('option');option.value=p.id;option.textContent=(p.id.startsWith('custom-')?'Własny · ':'')+p.name;select.append(option);}
   select.value=layoutStore.selected;
  }
  function syncLayoutEditor(){
-  const config=layoutStore.working[editOrientation];
-  const controls={buttons:'buttonLayout',order:'controlOrder',pwm:'pwmPosition',rail:'pwmSize',radar:'radarPosition',gap:'gap','radar-size':'radarShare','wheel-size':'wheelShare','control-size':'controlSize'};
-  for(const [id,key]of Object.entries(controls))$('layout-'+id).value=String(config[key]);
-  $('layout-radar-visible').checked=config.radar;
-  for(const key of ['landscape','portrait'])$('edit-'+key).setAttribute('aria-pressed',String(editOrientation===key));
-  for(const [id,key]of [['radar-size','radarShare'],['wheel-size','wheelShare'],['control-size','controlSize']])setText('layout-'+id+'-value',config[key]+'%');
-  $('layout-radar-size').disabled=!config.radar;$('layout-radar').disabled=!config.radar;$('layout-wheel-size').disabled=state.method!=='wheel';
-  $('layout-buttons').disabled=state.method!=='buttons';
-  $('layout-order').disabled=state.method==='buttons'&&config.buttonLayout==='cross';
   const custom=layoutStore.selected.startsWith('custom-');$('profile-save').disabled=!custom;$('profile-delete').disabled=!custom;
-  setText('layout-edit-hint','Edytujesz '+(editOrientation==='landscape'?'poziom':'pion')+'. '+(editOrientation===layoutOrientation()?'Zmiany zobaczysz po zamknięciu ustawień.':'Ten wariant włączy się po obróceniu ekranu.'));
-  if(fittedLayout(config,editOrientation).radarPosition!==config.radarPosition)setText('layout-edit-hint','Edytujesz '+(editOrientation==='landscape'?'poziom':'pion')+'. Na tym ekranie radar automatycznie zmienia pozycję, aby zachować miejsce na sterowanie.');
-  setText('profile-status',layoutNotice||(profileDirty()?'Bieżący układ zapamiętany. Zapisz go jako profil lub nadpisz własny.':'Profil aktywny. Możesz zapisać do 12 własnych profili.'));
-  drawLayoutPreview();
+  setText('profile-status',layoutNotice||(profileDirty()?'Bieżący układ zmieniony. Zapisz profil, aby zachować ten punkt przywracania.':'Profil aktywny. Własne układy zapisują się na tym urządzeniu.'));
  }
- function editLayout(key,value){stop();layoutNotice='';layoutStore.working[editOrientation]=cleanLayout({...layoutStore.working[editOrientation],[key]:value});saveLayouts();render();}
  function setupLayoutEditor(){
   renderProfileOptions();
-  $('layout-profile').addEventListener('change',event=>{const id=event.target.value,p=allProfiles().find(p=>p.id===id);if(!p)return;stop();layoutNotice='';layoutStore.selected=id;layoutStore.working=copy(p.layouts);$('profile-name').value=p.id.startsWith('custom-')?p.name:'';saveLayouts();render();});
-  for(const key of ['landscape','portrait'])$('edit-'+key).addEventListener('click',()=>{editOrientation=key;syncLayoutEditor();});
-  for(const [id,key]of Object.entries({buttons:'buttonLayout',order:'controlOrder',pwm:'pwmPosition',rail:'pwmSize',radar:'radarPosition',gap:'gap'}))$('layout-'+id).addEventListener('change',e=>editLayout(key,e.target.value));
-  for(const [id,key]of [['radar-size','radarShare'],['wheel-size','wheelShare'],['control-size','controlSize']])$('layout-'+id).addEventListener('input',e=>editLayout(key,Number(e.target.value)));
-  $('layout-radar-visible').addEventListener('change',e=>editLayout('radar',e.target.checked));
+  for(const key of FREE_KEYS){
+   const selectors={wheel:'#steering-wheel',gas:'.pedals [data-action="GAS"]',brake:'.pedals [data-action="BRAKE"]',gear:'#gear-picker',pwm:'#drive-speed-area',stop:'.handbrake-unit',radar:'#radar-panel'};
+   const el=document.querySelector(selectors[key]||'[data-mode="drive"][data-action="'+key+'"]');
+   freeElements[key]=el;el.dataset.freeBlock=key;
+  }
+  $('layout-profile').addEventListener('change',event=>{const p=allProfiles().find(p=>p.id===event.target.value);if(!p)return;stop();layoutNotice='';layoutStore.selected=p.id;layoutStore.working=copy(p.layouts);$('profile-name').value=p.id.startsWith('custom-')?p.name:'';saveLayouts();render();});
   $('profile-new').addEventListener('click',()=>{
    stop();const name=cleanName($('profile-name').value);if(!name){layoutNotice='Wpisz nazwę nowego profilu.';syncLayoutEditor();$('profile-name').focus();return;}
    if(customProfiles.length>=12){layoutNotice='Masz już 12 własnych profili. Nadpisz lub usuń jeden z nich.';syncLayoutEditor();return;}
-   const id='custom-'+(crypto.randomUUID?.()||Date.now().toString(36)+'-'+Math.random().toString(36).slice(2));customProfiles.push({id,name,layouts:copy(layoutStore.working)});layoutStore.selected=id;layoutNotice='Profil zapisany: '+name;saveLayouts();renderProfileOptions();render();
+   const id=newProfileId();customProfiles.push({id,name,layouts:copy(layoutStore.working)});layoutStore.selected=id;layoutNotice='Profil zapisany: '+name;saveLayouts();renderProfileOptions();render();
   });
   $('profile-save').addEventListener('click',()=>{const p=customProfiles.find(p=>p.id===layoutStore.selected);if(!p)return;stop();p.name=cleanName($('profile-name').value)||p.name;p.layouts=copy(layoutStore.working);layoutNotice='Zapisano zmiany profilu.';saveLayouts();renderProfileOptions();render();});
   $('profile-reset').addEventListener('click',()=>{stop();layoutStore.working=copy(allProfiles().find(p=>p.id===layoutStore.selected).layouts);layoutNotice='Przywrócono zapisany układ profilu.';saveLayouts();render();});
   $('profile-delete').addEventListener('click',()=>{const i=customProfiles.findIndex(p=>p.id===layoutStore.selected);if(i<0)return;stop();customProfiles.splice(i,1);layoutStore.selected='balanced';layoutStore.working=copy(presets[0].layouts);$('profile-name').value='';layoutNotice='Usunięto własny profil. Włączono układ klasyczny.';saveLayouts();renderProfileOptions();render();});
   const p=customProfiles.find(p=>p.id===layoutStore.selected);if(p)$('profile-name').value=p.name;
+  setupVisualEditor();
  }
+ // Rozmieszcza istniejące kontrolki. Obsługa Bluetooth i silników pozostaje wspólna.
+ function applyFreeLayout(plan){
+  const box=$('workdeck').getBoundingClientRect(),board={w:Math.max(1,box.width),h:Math.max(1,box.height)};
+  const signature=JSON.stringify([plan,board,state.method]);
+  document.body.dataset.pwm=plan.pwmAxis==='horizontal'?'bottom':'right';document.body.dataset.shortControls='false';
+  $('drive-speed').setAttribute('aria-orientation',plan.pwmAxis);$('drive-speed').setAttribute('orient',plan.pwmAxis);
+  if(signature===freeSignature)return;freeSignature=signature;
+  for(const key of visibleBlocks(state.method,preferences.radar)){
+   const r=fitRect(plan.rects[key],key,board),el=freeElements[key];
+   for(const [name,value]of Object.entries(r))el.style.setProperty('--free-'+name,(value*100)+'%');
+  }
+ }
+ function editorBoardSize(orientation){
+  const long=Math.max(window.innerWidth,window.innerHeight),short=Math.min(window.innerWidth,window.innerHeight);
+  return {w:Math.max(240,(orientation==='landscape'?long:short)-16),h:Math.max(180,(orientation==='landscape'?short:long)-64)};
+ }
+ function visualPlan(){return visual.draft[visual.orientation].freeform[variantKey(visual.method,visual.radar)];}
+ function visualSnapshot(){return JSON.stringify({draft:visual.draft,orientation:visual.orientation,method:visual.method,radar:visual.radar,selected:visual.selected});}
+ function recordVisual(before){if(before!==visualSnapshot()){visual.undo.push(before);if(visual.undo.length>50)visual.undo.shift();visual.redo=[];}updateVisualInspector();}
+ function restoreVisual(snapshot){Object.assign(visual,JSON.parse(snapshot));drawVisualBoard();}
+ function openVisualEditor(){
+  if(state.updating)return;stop();
+  const draft=copy(layoutStore.working);
+  for(const orientation of ['landscape','portrait']){
+   const config=draft[orientation];config.freeform=cleanFreeform(config.freeform);
+   for(const method of ['buttons','wheel'])for(const radar of [false,true]){
+    const key=variantKey(method,radar);if(!config.freeform[key])config.freeform[key]=seedFreeform(config,method,orientation,radar,editorBoardSize(orientation));
+   }
+  }
+  const profile=customProfiles.find(p=>p.id===layoutStore.selected);
+  visual={draft,orientation:layoutOrientation(),method:state.method,radar:activeLayout().radar,selected:null,undo:[],redo:[]};
+  $('visual-name').value=profile?.name||cleanName($('profile-name').value)||'Mój układ '+(customProfiles.length+1);
+  $('visual-editor').showModal();drawVisualBoard();render();
+ }
+ function fitVisualBoard(){
+  if(!visual||!$('visual-editor').open)return;
+  const frame=$('visual-stage').getBoundingClientRect(),board=visualPlan().board;
+  const scale=Math.max(.01,Math.min((frame.width-20)/board.w,(frame.height-20)/board.h));
+  $('visual-board').style.width=(board.w*scale)+'px';$('visual-board').style.height=(board.h*scale)+'px';
+ }
+ function tileContent(key){
+  const content=document.createElement('span');content.className='tile-content';
+  const icon=document.createElement('span');icon.className='tile-icon tile-'+key;
+  icon.textContent={F:'↑',B:'↓',L:'←',R:'→',SL:'↶',SR:'↷',wheel:'',radar:'',gear:'D  |  R',pwm:'',stop:'STOP',gas:'▥',brake:'▤'}[key];
+  const label=document.createElement('span');label.className='tile-label';label.textContent=FREE_NAMES[key];
+  content.append(icon,label);return content;
+ }
+ function drawVisualBoard(){
+  const plan=visualPlan(),board=$('visual-board');board.replaceChildren();board.dataset.axis=plan.pwmAxis;
+  $('visual-orientation').value=visual.orientation;$('visual-radar').value=visual.radar?'radar':'plain';$('visual-method').value=visual.method;
+  setText('visual-variant-title',(visual.orientation==='landscape'?'Poziom':'Pion')+' · '+(visual.radar?'z radarem':'bez radaru'));
+  for(const key of visibleBlocks(visual.method,visual.radar)){
+   const tile=document.createElement('div');tile.className='layout-tile';tile.dataset.block=key;tile.tabIndex=0;tile.setAttribute('role','button');tile.setAttribute('aria-label',FREE_NAMES[key]+' — przesuń lub zmień rozmiar');tile.append(tileContent(key));
+   for(const corner of ['nw','ne','sw','se']){const handle=document.createElement('span');handle.className='resize-handle handle-'+corner;handle.dataset.handle=corner;handle.tabIndex=-1;handle.setAttribute('role','button');handle.setAttribute('aria-label','Zmień rozmiar: '+{nw:'lewy górny róg',ne:'prawy górny róg',sw:'lewy dolny róg',se:'prawy dolny róg'}[corner]);tile.append(handle);}
+   board.append(tile);placeVisualTile(tile,plan.rects[key]);
+  }
+  if(!plan.rects[visual.selected])visual.selected=null;
+  fitVisualBoard();updateVisualInspector();
+ }
+ function placeVisualTile(tile,r){tile.style.left=r.x*100+'%';tile.style.top=r.y*100+'%';tile.style.width=r.w*100+'%';tile.style.height=r.h*100+'%';}
+ function updateVisualInspector(){
+  if(!visual)return;const plan=visualPlan(),r=plan.rects[visual.selected];
+  setText('visual-selected',r?FREE_NAMES[visual.selected]:'Wybierz blok');
+  setText('visual-size',r?Math.round(r.w*plan.board.w)+' × '+Math.round(r.h*plan.board.h)+' px':'Przesuń palcem lub myszą');
+  $('visual-rotate').disabled=visual.selected!=='pwm';$('visual-undo').disabled=!visual.undo.length;$('visual-redo').disabled=!visual.redo.length;
+  for(const tile of $('visual-board').querySelectorAll('.layout-tile')){
+   const selected=tile.dataset.block===visual.selected;tile.classList.toggle('selected',selected);tile.setAttribute('aria-pressed',String(selected));
+   tile.querySelectorAll('.resize-handle').forEach(h=>h.tabIndex=selected?0:-1);
+  }
+  const overlaps=overlappingBlocks(plan);$('visual-board').classList.toggle('has-overlap',overlaps.length>0);
+  const collided=new Set(overlaps.flat());for(const tile of $('visual-board').querySelectorAll('.layout-tile'))tile.classList.toggle('overlap',collided.has(tile.dataset.block));
+  setText('visual-feedback',overlaps.length?'Bloki nachodzą na siebie. Rozsuń je, aby łatwiej trafiać w przyciski.':'Przesuń blok. Rozmiar zmień za róg. Strzałki: ruch; Shift + strzałki: rozmiar.');
+ }
+ function finishVisualGesture(cancel=false){
+  if(!visualGesture)return;const gesture=visualGesture;visualGesture=null;
+  if(cancel){visualPlan().rects[gesture.key]=gesture.rect;placeVisualTile(gesture.tile,gesture.rect);updateVisualInspector();}
+  else recordVisual(gesture.before);
+  if($('visual-board').hasPointerCapture?.(gesture.id))$('visual-board').releasePointerCapture(gesture.id);
+ }
+ function discardVisual(){finishVisualGesture(true);visual=null;$('visual-editor').close();clearInputs();publish(true);render();}
+ function applyVisual(){
+  if(!visual)return;finishVisualGesture();const name=cleanName($('visual-name').value);
+  if(!name){setText('visual-feedback','Wpisz nazwę profilu.');$('visual-name').focus();return;}
+  let profile=customProfiles.find(p=>p.id===layoutStore.selected);
+  if(!profile&&customProfiles.length>=12){setText('visual-feedback','Limit 12 profili. Anuluj i wybierz własny profil do nadpisania albo usuń jeden.');return;}
+  stop();visual.draft[visual.orientation].radar=visual.radar;
+  const draft=cleanPair(visual.draft),method=visual.method;
+  if(!profile){profile={id:newProfileId(),name,layouts:draft};customProfiles.push(profile);}else{profile.name=name;profile.layouts=draft;}
+  layoutStore.selected=profile.id;layoutStore.working=copy(draft);state.method=method;state.mode='drive';preferences.method=method;
+  layoutNotice='Zapisano układ: '+name+'. Pion, poziom i widoki radaru są niezależne.';saveLayouts();savePreferences();$('profile-name').value=name;
+  visual=null;$('visual-editor').close();$('settings-dialog').close();clearInputs();publish(true);renderProfileOptions();render();
+ }
+ function setupVisualEditor(){
+  $('visual-open').addEventListener('click',openVisualEditor);$('visual-cancel').addEventListener('click',discardVisual);$('visual-apply').addEventListener('click',applyVisual);
+  $('visual-tools-toggle').addEventListener('click',()=>{finishVisualGesture(true);const expanded=$('visual-editor').dataset.expanded!=='true';$('visual-editor').dataset.expanded=String(expanded);$('visual-tools-toggle').setAttribute('aria-pressed',String(expanded));$('visual-tools-toggle').setAttribute('aria-label',expanded?'Pokaż opcje edytora':'Powiększ podgląd — schowaj opcje');});
+  $('visual-editor').addEventListener('cancel',event=>{event.preventDefault();discardVisual();});
+  $('visual-editor').addEventListener('close',()=>{finishVisualGesture(true);visual=null;clearInputs();publish(true);render();});
+  for(const [id,key]of [['visual-orientation','orientation'],['visual-method','method'],['visual-radar','radar']])$(id).addEventListener('change',event=>{finishVisualGesture(true);visual[key]=key==='radar'?event.target.value==='radar':event.target.value;visual.selected=null;drawVisualBoard();});
+  $('visual-undo').addEventListener('click',()=>{finishVisualGesture(true);if(!visual.undo.length)return;visual.redo.push(visualSnapshot());restoreVisual(visual.undo.pop());});
+  $('visual-redo').addEventListener('click',()=>{finishVisualGesture(true);if(!visual.redo.length)return;visual.undo.push(visualSnapshot());restoreVisual(visual.redo.pop());});
+  $('visual-reset').addEventListener('click',()=>{finishVisualGesture(true);const before=visualSnapshot(),plan=visualPlan(),config=visual.draft[visual.orientation];config.freeform[variantKey(visual.method,visual.radar)]=seedFreeform(config,visual.method,visual.orientation,visual.radar,plan.board);recordVisual(before);drawVisualBoard();});
+  $('visual-rotate').addEventListener('click',()=>{
+   if(visual.selected!=='pwm')return;const before=visualSnapshot(),plan=visualPlan(),r=plan.rects.pwm;
+   const w=r.h*plan.board.h/plan.board.w,h=r.w*plan.board.w/plan.board.h;
+   plan.rects.pwm=fitRect({x:r.x+(r.w-w)/2,y:r.y+(r.h-h)/2,w,h},'pwm',plan.board);plan.pwmAxis=plan.pwmAxis==='vertical'?'horizontal':'vertical';recordVisual(before);drawVisualBoard();
+  });
+  const board=$('visual-board');
+  board.addEventListener('pointerdown',event=>{
+   if(event.button!==0||visualGesture||!visual)return;const tile=event.target.closest('.layout-tile');if(!tile)return;event.preventDefault();
+   const key=tile.dataset.block;visual.selected=key;tile.focus({preventScroll:true});updateVisualInspector();
+   const bounds=board.getBoundingClientRect();visualGesture={id:event.pointerId,key,tile,rect:{...visualPlan().rects[key]},handle:event.target.closest('[data-handle]')?.dataset.handle||'',x:event.clientX,y:event.clientY,width:bounds.width,height:bounds.height,before:visualSnapshot()};
+   board.setPointerCapture(event.pointerId);
+  });
+  board.addEventListener('pointermove',event=>{
+   const g=visualGesture;if(!g||event.pointerId!==g.id)return;event.preventDefault();
+   let dx=(event.clientX-g.x)/g.width,dy=(event.clientY-g.y)/g.height;
+   if($('visual-snap').checked){const ax=g.rect.x+(g.handle.includes('e')?g.rect.w:0),ay=g.rect.y+(g.handle.includes('s')?g.rect.h:0);dx=Math.round((ax+dx)*100)/100-ax;dy=Math.round((ay+dy)*100)/100-ay;}
+   const r=alterRect(g.rect,dx,dy,g.handle,g.key,visualPlan().board);visualPlan().rects[g.key]=r;placeVisualTile(g.tile,r);updateVisualInspector();
+  });
+  board.addEventListener('pointerup',event=>{if(visualGesture?.id===event.pointerId)finishVisualGesture();});
+  for(const type of ['pointercancel','lostpointercapture'])board.addEventListener(type,event=>{if(visualGesture?.id===event.pointerId)finishVisualGesture(true);});
+  board.addEventListener('contextmenu',event=>event.preventDefault());
+  board.addEventListener('keydown',event=>{
+   const tile=event.target.closest('.layout-tile');if(!tile||!visual)return;
+   const key=tile.dataset.block;if(['Enter','Space'].includes(event.code)){event.preventDefault();visual.selected=key;updateVisualInspector();return;}
+   const delta={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[event.code];if(!delta)return;event.preventDefault();event.stopPropagation();visual.selected=key;
+   const before=visualSnapshot(),plan=visualPlan(),handle=event.target.closest('[data-handle]')?.dataset.handle||(event.shiftKey?'se':'');
+   plan.rects[key]=alterRect(plan.rects[key],delta[0]/plan.board.w,delta[1]/plan.board.h,handle,key,plan.board);placeVisualTile(tile,plan.rects[key]);recordVisual(before);
+  });
+  board.addEventListener('focusin',event=>{const tile=event.target.closest('.layout-tile');if(tile&&visual){visual.selected=tile.dataset.block;updateVisualInspector();}});
+  visualObserver=new ResizeObserver(()=>{finishVisualGesture(true);fitVisualBoard();});visualObserver.observe($('visual-stage'));
+  const deckObserver=new ResizeObserver(()=>{if(document.body.dataset.freeform==='true'){const plan=activeLayout().freeform?.[variantKey(state.method,activeLayout().radar)];if(plan)applyFreeLayout(plan);}});deckObserver.observe($('workdeck'));
+  window.addEventListener('blur',()=>finishVisualGesture(true));
+ }
+
 
  let updatedReload=false;
  try{updatedReload=sessionStorage.getItem('rover-update-reload')==='1';sessionStorage.removeItem('rover-update-reload');}catch(_){}
@@ -807,7 +1108,7 @@ class RoverSerial {
   if(Math.abs(window.innerWidth-layoutWidth)>2){layoutWidth=window.innerWidth;stopForLayoutChange();}
  });
  // Okno ustawień zatrzymuje auto i zwalnia aktywne przyciski.
- function modalOpen(){return $('settings-dialog').open||$('install-help').open;}
+ function modalOpen(){return $('settings-dialog').open||$('install-help').open||$('visual-editor').open;}
  function openSettings(){stop();editOrientation=layoutOrientation();$('settings-dialog').showModal();render();}
  function closeSettings(){$('settings-dialog').close();render();}
  $('settings-open').addEventListener('click',openSettings);
@@ -886,7 +1187,7 @@ class RoverSerial {
  updateInstallButton();
 
  // Sprawdza wersję aplikacji i uruchamia aktualizację na żądanie.
- const APP_VERSION='0.9.0', APP_BUILD='r678d08ca9d958de3';
+ const APP_VERSION='0.10.0', APP_BUILD='r8ab1c1abfdaeeb4';
  let swRegistrationPromise=null;
  function ensureServiceWorker(){
   if(!('serviceWorker' in navigator)||!window.isSecureContext||location.protocol==='file:')return Promise.resolve(null);
